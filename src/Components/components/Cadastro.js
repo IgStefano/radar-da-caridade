@@ -1,6 +1,7 @@
 import CadastroField from "./CadastroField";
 import { useState } from "react";
 import axios from "axios";
+import NavBar from "./NavBar";
 import ViaCep from "react-via-cep";
 
 export default function Cadastro() {
@@ -57,12 +58,11 @@ export default function Cadastro() {
   }
 
   // State do CEP
-  const [cep, setCep] = useState(0);
+  const [cep, setCep] = useState("");
 
   // Função para setar o CEP
   function handleCep(event) {
     setCep(event.target.value);
-    console.log(cep);
   }
 
   function handleSuccess(cepData) {
@@ -82,7 +82,6 @@ export default function Cadastro() {
         value={formData.nomeAção}
         required // Torna o preenchimento desse campo obrigatório
       />
-
       {/* Input CEP */}
       <ViaCep cep={cep} onSuccess={handleSuccess} lazy>
         {({ data, loading, error, fetch }) => {
@@ -94,86 +93,97 @@ export default function Cadastro() {
           }
           if (data) {
             return (
+              /* <div>
+                {setFormData({
+                  ...formData,
+                  cepAção: data.cep,
+                  logradouro: data.logradouro,
+                  cidade: data.localidade,
+                  estado: data.uf,
+                })}
+              </div> */
               <div>
-                <p>
-                  CEP: {data.cep} <br />
-                  LOGRADOURO: {data.logradouro} <br />
-                  CIDADE: {data.localidade} <br />
-                  UF: {data.uf} <br />
-                </p>
+                <CadastroField
+                  label="CEP"
+                  id="inputCep"
+                  type="text"
+                  name="CEP"
+                  onChange={data.cep.length !== 8 ? handleChange : null}
+                  value={data.cep}
+                  required // Torna o preenchimento desse campo obrigatório
+                />
+
+                <CadastroField
+                  label="Logradouro"
+                  id="inputLogradouro"
+                  type="text"
+                  name="logradouro"
+                  onChange={data.cep.length !== 8 ? handleChange : null}
+                  value={data.logradouro}
+                  required // Torna o preenchimento desse campo obrigatório
+                />
+
+                <CadastroField
+                  label="Cidade"
+                  id="inputCidade"
+                  type="text"
+                  name="cidade"
+                  onChange={data.cep.length !== 8 ? handleChange : null}
+                  value={data.localidade}
+                  required // Torna o preenchimento desse campo obrigatório
+                />
+
+                <CadastroField
+                  label="UF"
+                  id="inputEstado"
+                  type="text"
+                  name="estado"
+                  onChange={data.cep.length !== 8 ? handleChange : null}
+                  value={data.uf}
+                  required // Torna o preenchimento desse campo obrigatório
+                />
               </div>
             );
           }
           return (
             <div>
+              <NavBar />
               <input
+                label="CEP"
                 onChange={handleCep}
                 value={cep}
-                placeholder="CEP"
+                placeholder="CEP (apenas números)"
                 name="cep"
                 type="number"
               />
-              <button onClick={fetch}>Pesquisar</button>
+              <button onClick={cep.length !== 8 ? null : fetch}>
+                Confirmar CEP
+              </button>
             </div>
           );
         }}
       </ViaCep>
 
-      {/* Input Logradouro */}
-      <CadastroField
-        label="Local"
-        id="inputLocal"
-        type="text"
-        name="local"
-        onChange={handleChange}
-        value={formData.local}
-        required // Torna o preenchimento desse campo obrigatório
-      />
-
-      {/* Input Cidade */}
-      <CadastroField
-        label="Local"
-        id="inputLocal"
-        type="text"
-        name="local"
-        onChange={handleChange}
-        value={formData.local}
-        required // Torna o preenchimento desse campo obrigatório
-      />
-
-      {/* Input Estado */}
-      <CadastroField
-        label="Local"
-        id="inputLocal"
-        type="text"
-        name="local"
-        onChange={handleChange}
-        value={formData.local}
-        required // Torna o preenchimento desse campo obrigatório
-      />
-
       {/* Input Número */}
       <CadastroField
-        label="Local"
-        id="inputLocal"
-        type="text"
-        name="local"
+        label="Número"
+        id="inputNumero"
+        placeholder="(se houver)"
+        type="number"
+        name="numero"
         onChange={handleChange}
-        value={formData.local}
-        required // Torna o preenchimento desse campo obrigatório
+        value={formData.numero}
       />
-
       {/* Input Complemento */}
       <CadastroField
-        label="Local"
-        id="inputLocal"
+        label="Complemento"
+        id="inputComplemento"
+        placeholder="(se houver)"
         type="text"
-        name="local"
+        name="complemento"
         onChange={handleChange}
-        value={formData.local}
-        required // Torna o preenchimento desse campo obrigatório
+        value={formData.complemento}
       />
-
       {/* Input Data */}
       <CadastroField
         label="Data"
@@ -184,7 +194,6 @@ export default function Cadastro() {
         value={formData.data}
         required // Torna o preenchimento desse campo obrigatório
       />
-
       {/* Input Horário */}
       <CadastroField
         label="Horário"
@@ -195,7 +204,6 @@ export default function Cadastro() {
         value={formData.horário}
         required // Torna o preenchimento desse campo obrigatório
       />
-
       {/* Input Descrição => se não funcionar com textarea, ver outras alternativas */}
       <textarea
         label="Descrição"
@@ -206,7 +214,6 @@ export default function Cadastro() {
         value={formData.nomeAção}
         required // Torna o preenchimento desse campo obrigatório
       />
-
       {/* Input Nome do Organizador */}
       <CadastroField
         label="Organizada por"
@@ -217,27 +224,26 @@ export default function Cadastro() {
         value={formData.nomeOrg}
         required // Torna o preenchimento desse campo obrigatório
       />
-
       {/* Input Contato do Organizador */}
       <CadastroField
-        label="Telefone do(a) responsável pela ação (opcional)"
+        label="Telefone do(a) responsável pela ação"
+        placeholder="(opcional)"
         id="inputTelOrg"
         type="tel"
         name="telOrg"
         onChange={handleChange}
         value={formData.telOrg}
       />
-
       {/* Input Contato do Organizador */}
       <CadastroField
-        label="E-mail do(a) responsável pela ação (opcional)"
+        label="E-mail do(a) responsável pela ação"
+        placeholder="(opcional)"
         id="inputEmailOrg"
         type="email"
         name="emailOrg"
         onChange={handleChange}
         value={formData.emailOrg}
       />
-
       <button disabled={isSending} type="submit">
         Enviar a Ação
       </button>
