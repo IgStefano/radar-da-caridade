@@ -11,7 +11,7 @@ export default function Cadastro() {
     logradouro: "", // definido automaticamente pelo viaCEP
     cidade: "", // definida automaticamente pelo viaCEP
     estado: "", // definido automaticamente pelo viaCEP
-    número: "", // number
+    numero: "", // number
     complemento: "", // string
     data: "", // Date
     horário: "", // Time
@@ -37,6 +37,16 @@ export default function Cadastro() {
   function handleSubmit(event) {
     // Impedir o comportamento padrão do formulário de enviar os dados pela URL
     event.preventDefault();
+
+    // Atualiza os dados de endereço do formulário
+    setFormData({
+      ...formData,
+      cepAção: event.target.value,
+      logradouro: event.target.value,
+      cidade: event.target.value,
+      estado: event.target.value,
+    });
+    console.log(formData);
 
     // Coloca o estado do formulário como "enviando"
     setIsSending(true);
@@ -70,30 +80,33 @@ export default function Cadastro() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Input nomeAção */}
-      <CadastroField
-        label="Nome da Ação"
-        id="inputnomeAção"
-        type="text"
-        name="nomeAção" // O atributo name obrigatoriamente precisa ter o mesmo valor que os nome da chave do objeto de state que guarda o valor desse campo
-        // As linhas abaixo tornam esse input controlado pelo React, ou seja, sua informação está sempre sincronizada com o state e toda vez que ela muda, o state é atualizado.
-        onChange={handleChange}
-        value={formData.nomeAção}
-        required // Torna o preenchimento desse campo obrigatório
-      />
-      {/* Input CEP */}
-      <ViaCep cep={cep} onSuccess={handleSuccess} lazy>
-        {({ data, loading, error, fetch }) => {
-          if (loading) {
-            return <p>loading...</p>;
-          }
-          if (error) {
-            return <p>error</p>;
-          }
-          if (data) {
-            return (
-              /* <div>
+    <div>
+      <NavBar />
+
+      <form id="cadastro" onSubmit={handleSubmit}>
+        {/* Input nomeAção */}
+        <CadastroField
+          label="Nome da Ação"
+          id="inputnomeAção"
+          type="text"
+          name="nomeAção" // O atributo name obrigatoriamente precisa ter o mesmo valor que os nome da chave do objeto de state que guarda o valor desse campo
+          // As linhas abaixo tornam esse input controlado pelo React, ou seja, sua informação está sempre sincronizada com o state e toda vez que ela muda, o state é atualizado.
+          onChange={handleChange}
+          value={formData.nomeAção}
+          required // Torna o preenchimento desse campo obrigatório
+        />
+        {/* Input CEP */}
+        <ViaCep cep={cep} onSuccess={handleSuccess} lazy>
+          {({ data, loading, error, fetch }) => {
+            if (loading) {
+              return <p>loading...</p>;
+            }
+            if (error) {
+              return <p>error</p>;
+            }
+            if (data) {
+              return (
+                /* <div>
                 {setFormData({
                   ...formData,
                   cepAção: data.cep,
@@ -102,151 +115,148 @@ export default function Cadastro() {
                   estado: data.uf,
                 })}
               </div> */
+                <div>
+                  <CadastroField
+                    label="CEP"
+                    id="inputCep"
+                    type="text"
+                    name="cepAção"
+                    value={data.cep}
+                    required // Torna o preenchimento desse campo obrigatório
+                  />
+
+                  <CadastroField
+                    label="Logradouro"
+                    id="inputLogradouro"
+                    type="text"
+                    name="logradouro"
+                    value={data.logradouro}
+                    required // Torna o preenchimento desse campo obrigatório
+                  />
+
+                  <CadastroField
+                    label="Cidade"
+                    id="inputCidade"
+                    type="text"
+                    name="cidade"
+                    value={data.localidade}
+                    required // Torna o preenchimento desse campo obrigatório
+                  />
+
+                  <CadastroField
+                    label="UF"
+                    id="inputEstado"
+                    type="text"
+                    name="estado"
+                    onLoad={handleChange}
+                    value={data.uf}
+                    required // Torna o preenchimento desse campo obrigatório
+                  />
+                </div>
+              );
+            }
+            return (
               <div>
-                <CadastroField
+                <input
                   label="CEP"
-                  id="inputCep"
-                  type="text"
-                  name="CEP"
-                  onChange={data.cep.length !== 8 ? handleChange : null}
-                  value={data.cep}
-                  required // Torna o preenchimento desse campo obrigatório
+                  onChange={handleCep}
+                  value={cep}
+                  placeholder="CEP (apenas números)"
+                  name="cep"
+                  type="number"
                 />
-
-                <CadastroField
-                  label="Logradouro"
-                  id="inputLogradouro"
-                  type="text"
-                  name="logradouro"
-                  onChange={data.cep.length !== 8 ? handleChange : null}
-                  value={data.logradouro}
-                  required // Torna o preenchimento desse campo obrigatório
-                />
-
-                <CadastroField
-                  label="Cidade"
-                  id="inputCidade"
-                  type="text"
-                  name="cidade"
-                  onChange={data.cep.length !== 8 ? handleChange : null}
-                  value={data.localidade}
-                  required // Torna o preenchimento desse campo obrigatório
-                />
-
-                <CadastroField
-                  label="UF"
-                  id="inputEstado"
-                  type="text"
-                  name="estado"
-                  onChange={data.cep.length !== 8 ? handleChange : null}
-                  value={data.uf}
-                  required // Torna o preenchimento desse campo obrigatório
-                />
+                <button onClick={cep.length !== 8 ? null : fetch}>
+                  Confirmar CEP
+                </button>
               </div>
             );
-          }
-          return (
-            <div>
-              <NavBar />
-              <input
-                label="CEP"
-                onChange={handleCep}
-                value={cep}
-                placeholder="CEP (apenas números)"
-                name="cep"
-                type="number"
-              />
-              <button onClick={cep.length !== 8 ? null : fetch}>
-                Confirmar CEP
-              </button>
-            </div>
-          );
-        }}
-      </ViaCep>
+          }}
+        </ViaCep>
 
-      {/* Input Número */}
-      <CadastroField
-        label="Número"
-        id="inputNumero"
-        placeholder="(se houver)"
-        type="number"
-        name="numero"
-        onChange={handleChange}
-        value={formData.numero}
-      />
-      {/* Input Complemento */}
-      <CadastroField
-        label="Complemento"
-        id="inputComplemento"
-        placeholder="(se houver)"
-        type="text"
-        name="complemento"
-        onChange={handleChange}
-        value={formData.complemento}
-      />
-      {/* Input Data */}
-      <CadastroField
-        label="Data"
-        id="inputData"
-        type="date"
-        name="data"
-        onChange={handleChange}
-        value={formData.data}
-        required // Torna o preenchimento desse campo obrigatório
-      />
-      {/* Input Horário */}
-      <CadastroField
-        label="Horário"
-        id="inputHorário"
-        type="time"
-        name="horário"
-        onChange={handleChange}
-        value={formData.horário}
-        required // Torna o preenchimento desse campo obrigatório
-      />
-      {/* Input Descrição => se não funcionar com textarea, ver outras alternativas */}
-      <textarea
-        label="Descrição"
-        id="inputDescrição"
-        type="textArea"
-        name="local"
-        onChange={handleChange}
-        value={formData.nomeAção}
-        required // Torna o preenchimento desse campo obrigatório
-      />
-      {/* Input Nome do Organizador */}
-      <CadastroField
-        label="Organizada por"
-        id="inputNomeOrg"
-        type="text"
-        name="nomeOrg"
-        onChange={handleChange}
-        value={formData.nomeOrg}
-        required // Torna o preenchimento desse campo obrigatório
-      />
-      {/* Input Contato do Organizador */}
-      <CadastroField
-        label="Telefone do(a) responsável pela ação"
-        placeholder="(opcional)"
-        id="inputTelOrg"
-        type="tel"
-        name="telOrg"
-        onChange={handleChange}
-        value={formData.telOrg}
-      />
-      {/* Input Contato do Organizador */}
-      <CadastroField
-        label="E-mail do(a) responsável pela ação"
-        placeholder="(opcional)"
-        id="inputEmailOrg"
-        type="email"
-        name="emailOrg"
-        onChange={handleChange}
-        value={formData.emailOrg}
-      />
-      <button disabled={isSending} type="submit">
-        Enviar a Ação
-      </button>
-    </form>
+        {/* Input Número */}
+        <CadastroField
+          label="Número"
+          id="inputNumero"
+          placeholder="(se houver)"
+          type="number"
+          name="numero"
+          onChange={handleChange}
+          value={formData.numero}
+        />
+        {/* Input Complemento */}
+        <CadastroField
+          label="Complemento"
+          id="inputComplemento"
+          placeholder="(se houver)"
+          type="text"
+          name="complemento"
+          onChange={handleChange}
+          value={formData.complemento}
+        />
+        {/* Input Data */}
+        <CadastroField
+          label="Data"
+          id="inputData"
+          type="date"
+          name="data"
+          onChange={handleChange}
+          value={formData.data}
+          required // Torna o preenchimento desse campo obrigatório
+        />
+        {/* Input Horário */}
+        <CadastroField
+          label="Horário"
+          id="inputHorário"
+          type="time"
+          name="horário"
+          onChange={handleChange}
+          value={formData.horário}
+          required // Torna o preenchimento desse campo obrigatório
+        />
+        {/* Input Descrição => se não funcionar com textarea, ver outras alternativas */}
+        <textarea
+          id="inputDescrição"
+          form="cadastro"
+          name="descrição"
+          onChange={handleChange}
+          value={formData.descrição}
+        >
+          Insira aqui a descrição da ação{" "}
+        </textarea>
+        {/* Input Nome do Organizador */}
+        <CadastroField
+          label="Organizada por"
+          id="inputNomeOrg"
+          type="text"
+          name="nomeOrg"
+          onChange={handleChange}
+          value={formData.nomeOrg}
+          required // Torna o preenchimento desse campo obrigatório
+        />
+        {/* Input Contato do Organizador */}
+        <CadastroField
+          label="Telefone do(a) responsável pela ação"
+          placeholder="(opcional)"
+          id="inputTelOrg"
+          type="tel"
+          name="telOrg"
+          onChange={handleChange}
+          value={formData.telOrg}
+        />
+        {/* Input Contato do Organizador */}
+        <CadastroField
+          label="E-mail do(a) responsável pela ação"
+          placeholder="(opcional)"
+          id="inputEmailOrg"
+          type="email"
+          name="emailOrg"
+          onChange={handleChange}
+          value={formData.emailOrg}
+        />
+        <button disabled={isSending} type="submit">
+          Enviar a Ação
+        </button>
+      </form>
+    </div>
   );
 }
