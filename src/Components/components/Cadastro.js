@@ -38,16 +38,6 @@ export default function Cadastro() {
     // Impedir o comportamento padrão do formulário de enviar os dados pela URL
     event.preventDefault();
 
-    // Atualiza os dados de endereço do formulário
-    setFormData({
-      ...formData,
-      cepAção: event.target.value,
-      logradouro: event.target.value,
-      cidade: event.target.value,
-      estado: event.target.value,
-    });
-    console.log(formData);
-
     // Coloca o estado do formulário como "enviando"
     setIsSending(true);
 
@@ -79,11 +69,25 @@ export default function Cadastro() {
     console.log(cepData);
   }
 
+  function handleLoadData(event) {
+    // Atualiza os dados de endereço do formulário
+    if (event.target.cepAção !== undefined) {
+      setFormData({
+        ...formData,
+        cepAção: event.target.cepAção.value,
+        logradouro: event.target.logradouro.value,
+        cidade: event.target.cidade.value,
+        estado: event.target.estado.value,
+      });
+      console.log(formData);
+    }
+  }
+
   return (
     <div>
       <NavBar />
 
-      <form id="cadastro" onSubmit={handleSubmit}>
+      <form id="cadastro" onMouseEnter={handleLoadData} onSubmit={handleSubmit}>
         {/* Input nomeAção */}
         <CadastroField
           label="Nome da Ação"
@@ -121,6 +125,7 @@ export default function Cadastro() {
                     id="inputCep"
                     type="text"
                     name="cepAção"
+                    readOnly={data.cep}
                     value={data.cep}
                     required // Torna o preenchimento desse campo obrigatório
                   />
@@ -131,6 +136,7 @@ export default function Cadastro() {
                     type="text"
                     name="logradouro"
                     value={data.logradouro}
+                    readOnly={data.logradouro}
                     required // Torna o preenchimento desse campo obrigatório
                   />
 
@@ -139,6 +145,7 @@ export default function Cadastro() {
                     id="inputCidade"
                     type="text"
                     name="cidade"
+                    readOnly={data.localidade}
                     value={data.localidade}
                     required // Torna o preenchimento desse campo obrigatório
                   />
@@ -148,7 +155,7 @@ export default function Cadastro() {
                     id="inputEstado"
                     type="text"
                     name="estado"
-                    onLoad={handleChange}
+                    readOnly={data.uf}
                     value={data.uf}
                     required // Torna o preenchimento desse campo obrigatório
                   />
