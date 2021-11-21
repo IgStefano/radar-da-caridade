@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ImgNavBar from "../../Assets/Images/home.jpg";
+import ImgNavBar from "../../Assets/Images/home.png";
 
 function NavBar() {
   return (

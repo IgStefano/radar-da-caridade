@@ -1,4 +1,3 @@
-import NavBar from "./NavBar";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -34,10 +33,5 @@ export default function Lista() {
       .catch((err) => console.log(err));
   }, []);
 
-  return (
-    <div>
-      <NavBar />
-      {ações}
-    </div>
-  );
+  return <div>{ações}</div>;
 }
