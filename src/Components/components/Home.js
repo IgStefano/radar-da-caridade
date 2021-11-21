@@ -7,7 +7,7 @@ import Logocss from "../../Assets/Styles/Logo.css";
 function Home() {
   return (
     <div>
-      <img src={Logo} className="LogoHome" />
+      <img src={Logo} alt="Radar da Caridade" className="LogoHome" />
       <div className="Links">
         <Link to="/Sobre">
           <h2>Conheça mais sobre o projeto</h2>
