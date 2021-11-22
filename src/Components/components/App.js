@@ -22,7 +22,6 @@ function App() {
           <Route path="/deletar/:id" element={<DeletarAção />} />
         </Routes>
       </div>
-      <MapView />
     </div>
   );
 }
