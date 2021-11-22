@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Sobre from "./Sobre";
 import Cadastro from "./Cadastro";
 import Home from "./Home";
-import Sobrecss from "../../Assets/Styles/Sobre.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
