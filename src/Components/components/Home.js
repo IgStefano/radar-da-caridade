@@ -3,6 +3,7 @@ import React from "react";
 import Lista from "./Lista";
 import Logo from "../../Assets/Images/Logo.png";
 import Logocss from "../../Assets/Styles/Logo.css";
+import MapView from "./MapView";
 
 function Home() {
   return (
@@ -15,8 +16,14 @@ function Home() {
         <Link to="/Cadastro">
           <h2>Cadastre aqui as suas ações</h2>
         </Link>
-        <Lista />
+        <div
+          style={{ height: "400px", overflowX: "hidden" }}
+          className="overflow-scroll w-25"
+        >
+          <Lista />
+        </div>
       </div>
+      <MapView />
     </div>
   );
 }
