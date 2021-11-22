@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 
 function Sobre() {
   return (
-    <div class="text-justify">
+    <div className="text-justify">
       <NavBar />
       <h1 className="text-center">Conheça o Radar da Caridade</h1>
       <div className="text-xs-right">
