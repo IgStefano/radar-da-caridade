@@ -82,7 +82,7 @@ export default function Cadastro() {
       console.log(formData);
     }
   }
-
+  console.log(formData);
   return (
     <div>
       <NavBar />

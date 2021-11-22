@@ -15,7 +15,12 @@ function Home() {
         <Link to="/Cadastro">
           <h2>Cadastre aqui as suas ações</h2>
         </Link>
-        <Lista />
+        <div
+          style={{ height: "400px", overflowX: "hidden" }}
+          className="overflow-scroll w-25"
+        >
+          <Lista />
+        </div>
       </div>
     </div>
   );
