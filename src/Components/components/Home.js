@@ -7,8 +7,12 @@ import MapView from "./MapView";
 
 function Home() {
   return (
-    <div>
+    <div className="background">
+      <h1 className="TitleR">Radar</h1>
+      <h1 className="TitleD">da</h1>
+      <h1 className="TitleC">Caridade</h1>
       <img src={Logo} alt="Radar da Caridade" className="LogoHome" />
+
       <div className="Links">
         <Link to="/Sobre">
           <h2>Conheça mais sobre o projeto</h2>
