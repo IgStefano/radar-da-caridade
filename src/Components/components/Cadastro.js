@@ -87,12 +87,20 @@ export default function Cadastro() {
   }
   console.log(formData);
   return (
-    <div>
-      <NavBar />
-
-      <form id="cadastro" onMouseEnter={handleLoadData} onSubmit={handleSubmit}>
+    <div className="d-flex justify-content-center">
+      <div>
+        <NavBar />
+      </div>
+      <form
+        id="cadastro"
+        className="mt-3"
+        style={{ fontFamily: "Roboto Slab" }}
+        onMouseEnter={handleLoadData}
+        onSubmit={handleSubmit}
+      >
         {/* Input nomeAção */}
         <CadastroField
+          className="form-control"
           label="Nome da Ação"
           id="inputnomeAção"
           type="text"
@@ -106,10 +114,10 @@ export default function Cadastro() {
         <ViaCep cep={cep} onSuccess={handleSuccess} lazy>
           {({ data, loading, error, fetch }) => {
             if (loading) {
-              return <p>loading...</p>;
+              return <p>Carregando o seu endereço...</p>;
             }
             if (error) {
-              return <p>error</p>;
+              return <p>Erro! Atualize a página e tente novamente.</p>;
             }
             if (data) {
               return (
@@ -122,62 +130,79 @@ export default function Cadastro() {
                   estado: data.uf,
                 })}
               </div> */
-                <div>
+                <div className="d-flex flex-row justify-content-around align-text-center">
                   <CadastroField
-                    label="CEP"
+                    className="form-control-plaintext m-0 p-0"
+                    // label="CEP"
                     id="inputCep"
                     type="text"
                     name="cepAção"
-                    readOnly={data.cep}
-                    value={data.cep}
+                    readOnly={true}
+                    value={`CEP: ${data.cep}`}
                     required // Torna o preenchimento desse campo obrigatório
                   />
+                  <div className="d-flex flex-column justify-content-around">
+                    <CadastroField
+                      // label="Logradouro"
+                      className="form-control-plaintext m-0 p-0"
+                      id="inputLogradouro"
+                      type="text"
+                      name="logradouro"
+                      value={`Logradouro: ${data.logradouro}`}
+                      readOnly={true}
+                      required // Torna o preenchimento desse campo obrigatório
+                    />
 
-                  <CadastroField
-                    label="Logradouro"
-                    id="inputLogradouro"
-                    type="text"
-                    name="logradouro"
-                    value={data.logradouro}
-                    readOnly={data.logradouro}
-                    required // Torna o preenchimento desse campo obrigatório
-                  />
+                    <CadastroField
+                      className="form-control-plaintext m-0 p-0"
+                      // label="Cidade"
+                      id="inputCidade"
+                      type="text"
+                      name="cidade"
+                      readOnly={true}
+                      value={`Cidade: ${data.localidade}`}
+                      required // Torna o preenchimento desse campo obrigatório
+                    />
 
-                  <CadastroField
-                    label="Cidade"
-                    id="inputCidade"
-                    type="text"
-                    name="cidade"
-                    readOnly={data.localidade}
-                    value={data.localidade}
-                    required // Torna o preenchimento desse campo obrigatório
-                  />
-
-                  <CadastroField
-                    label="UF"
-                    id="inputEstado"
-                    type="text"
-                    name="estado"
-                    readOnly={data.uf}
-                    value={data.uf}
-                    required // Torna o preenchimento desse campo obrigatório
-                  />
+                    <CadastroField
+                      className="form-control-plaintext m-0 p-0"
+                      // label="UF"
+                      id="inputEstado"
+                      type="text"
+                      name="estado"
+                      readOnly={true}
+                      value={`Estado: ${data.uf}`}
+                      required // Torna o preenchimento desse campo obrigatório
+                    />
+                  </div>
                 </div>
               );
             }
             return (
-              <div>
-                <input
-                  label="CEP"
-                  onChange={handleCep}
-                  value={cep}
-                  placeholder="CEP (apenas números)"
-                  name="cep"
-                  type="number"
-                />
-                <button onClick={cep.length !== 8 ? null : fetch}>
-                  Confirmar CEP
-                </button>
+              <div className="container">
+                <div className="mb-1 row align-items-center">
+                  <div className="col-form-label">
+                    <label htmlFor="cep-input">CEP</label>
+                    <div className="border-0">
+                      <input
+                        onChange={handleCep}
+                        value={cep}
+                        className="form-control"
+                        placeholder="(apenas números)"
+                        id="cep-input"
+                        name="cep"
+                        type="number"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    className="btn btn-primary"
+                    style={{ height: "50%", marginTop: "25px" }}
+                    onClick={cep.length !== 8 ? null : fetch}
+                  >
+                    Confirmar CEP
+                  </button>
+                </div>
               </div>
             );
           }}
@@ -185,6 +210,7 @@ export default function Cadastro() {
 
         {/* Input Número */}
         <CadastroField
+          className="form-control"
           label="Número"
           id="inputNumero"
           placeholder="(se houver)"
@@ -195,6 +221,7 @@ export default function Cadastro() {
         />
         {/* Input Complemento */}
         <CadastroField
+          className="form-control"
           label="Complemento"
           id="inputComplemento"
           placeholder="(se houver)"
@@ -205,6 +232,7 @@ export default function Cadastro() {
         />
         {/* Input Data */}
         <CadastroField
+          className="form-control"
           label="Data"
           id="inputData"
           type="date"
@@ -215,6 +243,7 @@ export default function Cadastro() {
         />
         {/* Input Horário */}
         <CadastroField
+          className="form-control"
           label="Horário"
           id="inputHorário"
           type="time"
@@ -225,6 +254,7 @@ export default function Cadastro() {
         />
         {/* Input Descrição => se não funcionar com textarea, ver outras alternativas */}
         <textarea
+          className="form-control"
           id="inputDescrição"
           form="cadastro"
           name="descrição"
@@ -235,6 +265,7 @@ export default function Cadastro() {
         </textarea>
         {/* Input Nome do Organizador */}
         <CadastroField
+          className="form-control"
           label="Organizada por"
           id="inputNomeOrg"
           type="text"
@@ -245,6 +276,7 @@ export default function Cadastro() {
         />
         {/* Input Contato do Organizador */}
         <CadastroField
+          className="form-control"
           label="Telefone do(a) responsável pela ação"
           placeholder="(opcional)"
           id="inputTelOrg"
@@ -255,6 +287,7 @@ export default function Cadastro() {
         />
         {/* Input Contato do Organizador */}
         <CadastroField
+          className="form-control"
           label="E-mail do(a) responsável pela ação"
           placeholder="(opcional)"
           id="inputEmailOrg"
@@ -263,9 +296,16 @@ export default function Cadastro() {
           onChange={handleChange}
           value={formData.emailOrg}
         />
-        <button disabled={isSending} type="submit">
-          Enviar a Ação
-        </button>
+        <div className="d-flex justify-content-center">
+          <button
+            className="btn btn-success w-50 mb-3"
+            style={{ fontFamily: "Roboto Slab" }}
+            disabled={isSending}
+            type="submit"
+          >
+            Enviar a Ação
+          </button>
+        </div>
       </form>
     </div>
   );

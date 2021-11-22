@@ -6,12 +6,14 @@ function CadastroField(props) {
       </label>
       <input
         type={props.type}
-        className="form-control"
+        className={props.className}
+        style={props.style}
         id={props.id}
         name={props.name}
         onChange={props.onChange}
         value={props.value}
         required={props.required}
+        readOnly={props.readOnly}
       />
     </div>
   );

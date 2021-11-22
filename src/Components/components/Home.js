@@ -3,6 +3,7 @@ import React from "react";
 import Lista from "./Lista";
 import Logo from "../../Assets/Images/Logo.png";
 import Logocss from "../../Assets/Styles/Logo.css";
+import MapView from "./MapView";
 
 function Home() {
   return (
@@ -22,6 +23,7 @@ function Home() {
           <Lista />
         </div>
       </div>
+      <MapView />
     </div>
   );
 }
