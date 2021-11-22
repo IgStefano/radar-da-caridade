@@ -7,7 +7,7 @@ function Sobre() {
       <NavBar />
       <h1 className="text-center">Conheça o Radar da Caridade</h1>
       <div className="text-xs-right">
-        <div class="container-fluid">
+        <div className="container-fluid">
           <p>
             O projeto "Radar da Caridade" é uma iniciativa que visa dar resposta
             à necessidade urgente de algo que a humanidade sempre enfrentou: A

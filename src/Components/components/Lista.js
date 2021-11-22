@@ -25,6 +25,12 @@ export default function Lista() {
                     <aside>Ação organizada por {currentAção.nomeOrg}</aside>
                   </div>
                 </Link>
+                <Link to={`editar/${currentAção._id}`}>
+                  <button>Editar essa ação</button>
+                </Link>
+                <Link to={`deletar/${currentAção._id}`}>
+                  <button>Deletar essa ação</button>
+                </Link>
               </div>
             );
           })
