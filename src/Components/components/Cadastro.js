@@ -1,5 +1,6 @@
 import CadastroField from "./CadastroField";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavBar from "./NavBar";
 import ViaCep from "react-via-cep";
@@ -21,6 +22,7 @@ export default function Cadastro() {
     emailOrg: "", // Email => lembrar de usar label
   });
   const [isSending, setIsSending] = useState(false);
+  const navigate = useNavigate();
 
   // Para o valor da data, usar a linha abaixo
   // value={new Date(formData.birthDate).toISOString().slice(0, 10)}
@@ -50,6 +52,7 @@ export default function Cadastro() {
         console.log(response);
         // Tira o estado de "enviando"
         setIsSending(false);
+        navigate("/"); // Navega de volta à lista
       })
       .catch((err) => {
         console.log(err);

@@ -1,12 +1,13 @@
 import CadastroField from "./CadastroField";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavBar from "./NavBar";
 import ViaCep from "react-via-cep";
 
 export default function EditarAção() {
   const params = useParams();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     nomeAção: "", // Input type String
@@ -70,6 +71,7 @@ export default function EditarAção() {
         console.log(response);
         // Tira o estado de "enviando"
         setIsSending(false);
+        navigate("/"); // Navega de volta à lista
       })
       .catch((err) => {
         console.log(err);

@@ -7,7 +7,7 @@ import AçãoÚnica from "./AçãoÚnica";
 import EditarAção from "./EditarAção";
 import DeletarAção from "./DeletarAção";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Sobrecss from "../../Assets/Styles/Sobre.css";
+import MapView from "./MapView";
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
           <Route path="/deletar/:id" element={<DeletarAção />} />
         </Routes>
       </div>
+      <MapView />
     </div>
   );
 }
