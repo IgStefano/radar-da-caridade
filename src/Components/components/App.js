@@ -8,7 +8,6 @@ import EditarAção from "./EditarAção";
 import DeletarAção from "./DeletarAção";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MapView from "./MapView";
-import MapViewcss from "../../Assets/Styles/MapView.css";
 
 function App() {
   return (
