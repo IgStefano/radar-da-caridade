@@ -7,29 +7,22 @@ export default function PegarCoordenadas(props) {
     props.logradouro,
     props.numero ? props.numero : null,
     props.cep,
-  ].join(" ");
-
-  const params = {
-    access_key: "35ffc352608969dd92020529c79ad793",
-    query: endereço,
-    limit: 2,
-  };
+  ].join(" "); // Pega os dados para a busca e junta eles em uma string
 
   useEffect(() => {
     axios
       .get(
         `https://us1.locationiq.com/v1/search.php?key=pk.a30beab4b3f3ebe1c0c0408641e2320a&q=${endereço}&format=json`
-      )
+      ) // Pega as coordenadas da API
       .then((response) => {
         let data = [response.data[0].lat, response.data[0].lon];
 
-        setCoordenadas(data);
+        setCoordenadas(data); // Coloca as coordenadas em uma array, na ordem: latitude e longitude
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  console.log(coordenadas);
-  return coordenadas;
+  return coordenadas; // retorna a array de coordenadas
 }
