@@ -7,7 +7,7 @@ function MapView() {
 
   return (
     <MapContainer
-      style={{ width: "100vw", height: "450px" }}
+      style={{ width: "auto", height: "700px" }}
       center={[-23.3, -45.9]}
       zoom={13}
       scrollWheelZoom={false}
