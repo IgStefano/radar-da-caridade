@@ -4,12 +4,19 @@ import Lista from "./Lista";
 import Logo from "../../Assets/Images/Logo.png";
 import Logocss from "../../Assets/Styles/Logo.css";
 import MapView from "./MapView";
+<<<<<<< HEAD
 import Background from "../../Assets/Images/fundo.jpg";
+=======
+import PegarCoordenadas from "./PegarCoordenadas";
+>>>>>>> 5d9c8f9adfed28044375855e2171f4089dabeaa6
 
 function Home() {
   return (
     <div>
+<<<<<<< HEAD
       <img className="background" src={Background} />
+=======
+>>>>>>> 5d9c8f9adfed28044375855e2171f4089dabeaa6
       <div>
         <div className="row">
           <div>
