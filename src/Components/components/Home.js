@@ -7,6 +7,26 @@ import MapView from "./MapView";
 
 function Home() {
   return (
+<<<<<<< HEAD
+    <div className="background">
+      <h1 className="Title R">Radar</h1>
+      <h1 className="Title D">da</h1>
+      <h1 className="Title C">Caridade</h1>
+      <img src={Logo} alt="Radar da Caridade" className="LogoHome" />
+
+      <div className="Links">
+        <Link to="/Sobre">
+          <h2>Conheça mais sobre o projeto</h2>
+        </Link>
+        <Link to="/Cadastro">
+          <h2>Cadastre aqui as suas ações</h2>
+        </Link>
+        <div
+          style={{ height: "400px", overflowX: "hidden" }}
+          className="overflow-scroll w-25 border border-2 border-secondary"
+        >
+          <Lista />
+=======
     <div>
       <div className="background">
         <h1 className="TitleR">Radar</h1>
@@ -57,6 +77,7 @@ function Home() {
               <MapView />
             </div>
           </div>
+>>>>>>> fe12964b92263bad766dfbd96ee6909f5d89a230
         </div>
       </div>
     </div>

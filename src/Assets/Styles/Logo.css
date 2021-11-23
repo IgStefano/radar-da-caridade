@@ -1,10 +1,11 @@
-.background {
+/* .background {
   background-image: url("/src/Assets/Images/fundo.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-.TitleR {
+} */
+
+.Title {
   font-family: Impact, fantasy;
   font-size: 90px;
   margin-top: 2%;
@@ -13,16 +14,19 @@
   color: red;
   text-shadow: 1px 1px 2px black, 0 0 1em rgb(7, 245, 58), 0 0 0.1em blue;
 }
-.TitleD {
-  font-family: Impact, fantasy;
-  font-size: 80px;
+
+.R {
+  margin-top: 2%;
+  text-align: center;
+}
+.D {
   margin-top: -1%;
   margin-left: 41%;
   font-family: "Montserrat Alternates", sans-serif;
   color: red;
   text-shadow: 1px 1px 2px black, 0 0 1em rgb(7, 245, 58), 0 0 0.1em blue;
 }
-.TitleC {
+.C {
   font-family: Impact, fantasy;
   font-size: 90px;
   margin-top: -1%;
