@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavBar from "./NavBar";
 import ViaCep from "react-via-cep";
+import cadastro from "../../Assets/Styles/cadastro.css";
 
 export default function Cadastro() {
   const [formData, setFormData] = useState({
@@ -87,14 +88,15 @@ export default function Cadastro() {
   }
   console.log(formData);
   return (
-    <div className="d-flex justify-content-center">
-      <div>
+    <div className="d-flex flex-column align-items-center justify-content-center">
+      <div className="border-bottom border-light border-2 w-100 d-flex justify-content-center flex-column align-items-center">
         <NavBar />
+        <h2>Cadastre a sua ação abaixo</h2>
       </div>
       <form
         id="cadastro"
         className="mt-3"
-        style={{ fontFamily: "Roboto Slab" }}
+        style={{ fontFamily: "Cairo" }}
         onMouseEnter={handleLoadData}
         onSubmit={handleSubmit}
       >
@@ -187,6 +189,7 @@ export default function Cadastro() {
                       <input
                         onChange={handleCep}
                         value={cep}
+                        style={{ width: "104%" }}
                         className="form-control"
                         placeholder="(apenas números)"
                         id="cep-input"

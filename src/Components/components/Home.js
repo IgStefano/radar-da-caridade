@@ -8,9 +8,9 @@ import MapView from "./MapView";
 function Home() {
   return (
     <div className="background">
-      <h1 className="TitleR">Radar</h1>
-      <h1 className="TitleD">da</h1>
-      <h1 className="TitleC">Caridade</h1>
+      <h1 className="Title R">Radar</h1>
+      <h1 className="Title D">da</h1>
+      <h1 className="Title C">Caridade</h1>
       <img src={Logo} alt="Radar da Caridade" className="LogoHome" />
 
       <div className="Links">
@@ -22,7 +22,7 @@ function Home() {
         </Link>
         <div
           style={{ height: "400px", overflowX: "hidden" }}
-          className="overflow-scroll w-25"
+          className="overflow-scroll w-25 border border-2 border-secondary"
         >
           <Lista />
         </div>

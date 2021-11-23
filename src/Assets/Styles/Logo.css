@@ -1,33 +1,28 @@
-<<<<<<< HEAD
-.background {
+/* .background {
   background-image: url("/src/Assets/Images/fundo.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-.TitleR {
+} */
+
+.Title {
   font-family: Impact, fantasy;
   font-size: 80px;
+  font-family: "Montserrat Alternates", sans-serif;
+  color: rgb(233, 8, 0);
+}
+
+.R {
   margin-top: 2%;
   text-align: center;
-  font-family: "Montserrat Alternates", sans-serif;
-  color: rgb(233, 8, 0);
 }
-.TitleD {
-  font-family: Impact, fantasy;
-  font-size: 80px;
+.D {
   margin-top: -1%;
   margin-left: 41%;
-  font-family: "Montserrat Alternates", sans-serif;
-  color: rgb(233, 8, 0);
 }
-.TitleC {
-  font-family: Impact, fantasy;
-  font-size: 80px;
+.C {
   margin-top: -1%;
   margin-left: 42%;
-  font-family: "Montserrat Alternates", sans-serif;
-  color: rgb(233, 8, 0);
 }
 .LogoHome {
   position: absolute;
@@ -36,5 +31,3 @@
   z-index: 0;
   width: 120px;
 }
-=======
->>>>>>> cf96a2aac0673b57324e1d7a29d11e3cb037b487
