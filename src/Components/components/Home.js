@@ -4,11 +4,12 @@ import Lista from "./Lista";
 import Logo from "../../Assets/Images/Logo.png";
 import Logocss from "../../Assets/Styles/Logo.css";
 import MapView from "./MapView";
+import PegarCoordenadas from "./PegarCoordenadas";
 
 function Home() {
   return (
     <div>
-      <div className="">
+      <div>
         <div className="row">
           <div className="background">
             {/* <h1 className="Title R">Radar</h1>
