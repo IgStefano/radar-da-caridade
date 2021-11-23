@@ -61,7 +61,7 @@ export default function EditarAção() {
     // Coloca o estado do formulário como "enviando"
     setIsSending(true);
 
-    // Entregar os dados armazenados no state para nossa API disparando uma requisição HTTP do tipo POST
+    // Entregar os dados armazenados no state para nossa API disparando uma requisição HTTP do tipo PUT
     axios
       .put(
         `https://ironrest.herokuapp.com/radar-da-caridade/${params.id}`,
