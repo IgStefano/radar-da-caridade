@@ -15,19 +15,28 @@ function Home() {
 
       <div className="Links">
         <Link to="/Sobre">
-          <h2>Conheça mais sobre o projeto</h2>
+          <h2 className="sobre">Conheça mais sobre o projeto</h2>
         </Link>
         <Link to="/Cadastro">
-          <h2>Cadastre aqui as suas ações</h2>
+          <h2 className="cadastro">Cadastre aqui as suas ações</h2>
         </Link>
-        <div
-          style={{ height: "400px", overflowX: "hidden" }}
-          className="overflow-scroll w-25"
-        >
-          <Lista />
+      </div>
+      <div className="container">
+        <div className="row">
+          <div className="row"></div>
+        </div>
+        <div className="row">
+          <div
+            style={{ height: "400px", overflowX: "hidden" }}
+            className="overflow-scroll w-25 col-2"
+          >
+            <Lista />
+          </div>
+          <div className="col-8">
+            <MapView />
+          </div>
         </div>
       </div>
-      <MapView />
     </div>
   );
 }
