@@ -4,17 +4,18 @@ import Lista from "./Lista";
 import Logo from "../../Assets/Images/Logo.png";
 import Logocss from "../../Assets/Styles/Logo.css";
 import MapView from "./MapView";
-import PegarCoordenadas from "./PegarCoordenadas";
+import Background from "../../Assets/Images/fundo.jpg";
 
 function Home() {
   return (
     <div>
+      <img className="background" src={Background} />
       <div>
         <div className="row">
-          <div className="background">
-            {/* <h1 className="Title R">Radar</h1>
+          <div>
+            <h1 className="Title R">Radar</h1>
             <h1 className="Title D">da</h1>
-            <h1 className="Title C">Caridade</h1> */}
+            <h1 className="Title C">Caridade</h1>
             <img src={Logo} alt="Radar da Caridade" className="LogoHome " />
           </div>
           <div className="ms-2">
@@ -43,7 +44,6 @@ function Home() {
                     style={{
                       fontSize: "25px",
                       color: "white",
-                      marginTop: "20px",
                     }}
                   >
                     Cadastre aqui as suas ações
