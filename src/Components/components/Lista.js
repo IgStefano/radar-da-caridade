@@ -24,17 +24,27 @@ export default function Lista() {
                     <p className="text-secondary m-0">
                       {currentAção.logradouro}
                     </p>
-                    <small className="text-uppercase text-end">
-                      {currentAção.cidade} - {currentAção.estado}
-                    </small>
-                    <aside>Ação organizada por {currentAção.nomeOrg}</aside>
+                    <div className="d-flex justify-content-end">
+                      <small className="text-uppercase text-black-50">
+                        {currentAção.cidade} - {currentAção.estado}
+                      </small>
+                    </div>
+                    <aside className="text-sucess">
+                      Ação organizada por {currentAção.nomeOrg}
+                    </aside>
                   </Link>
-                  <Link to={`editar/${currentAção._id}`}>
-                    <button>Editar essa ação</button>
-                  </Link>
-                  <Link to={`deletar/${currentAção._id}`}>
-                    <button>Deletar essa ação</button>
-                  </Link>
+                  <div className="d-flex justify-content-between">
+                    <Link to={`editar/${currentAção._id}`}>
+                      <button className="btn btn-success">
+                        Editar essa ação
+                      </button>
+                    </Link>
+                    <Link to={`deletar/${currentAção._id}`}>
+                      <button className="btn btn-danger">
+                        Deletar essa ação
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             );
