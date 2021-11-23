@@ -8,10 +8,12 @@ import EditarAção from "./EditarAção";
 import DeletarAção from "./DeletarAção";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MapView from "./MapView";
+import Background from "../../Assets/Images/fundo.jpg";
 
 function App() {
   return (
     <div>
+      <img className="background" src={Background} />
       <div className="Container">
         <Routes>
           <Route path="/" element={<Home />} />
