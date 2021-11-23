@@ -16,13 +16,13 @@ export default function PegarCoordenadas(props) {
       ) // Pega as coordenadas da API
       .then((response) => {
         let data = [response.data[0].lat, response.data[0].lon];
-
+        console.log(endereço);
         setCoordenadas(data); // Coloca as coordenadas em uma array, na ordem: latitude e longitude
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [endereço]);
 
   return coordenadas; // retorna a array de coordenadas
 }
