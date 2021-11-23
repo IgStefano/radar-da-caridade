@@ -26,29 +26,36 @@ export default function AçãoÚnica() {
   return (
     <div>
       <NavBar />
-      <h1>{essaAção.nomeAção}</h1>
-      <p>{essaAção.descrição}</p>
+      <div className="box d-flex flex-column justify-content-center align-items-center">
+        <div className="btn btn-success btn-lg">
+          <h1>{essaAção.nomeAção}</h1>
+          <p>{essaAção.descrição}</p>
 
-      <h3>
-        Ação realizada em {essaAção.logradouro}, {essaAção.numero}{" "}
-        {essaAção.complemento} - {essaAção.cidade} - {essaAção.estado}, no dia{" "}
-        {essaAção.data}.
-      </h3>
+          <h3>
+            Ação realizada em {essaAção.logradouro}, {essaAção.numero}{" "}
+            {essaAção.complemento}
+          </h3>
+          <h3>
+            {essaAção.cidade} - {essaAção.estado}
+          </h3>
+          <h3>Data {essaAção.data}</h3>
 
-      <small>
-        Ação organizada por: {essaAção.nomeOrg}.{" "}
-        {essaAção.telOrg ? essaAção.telOrg : null}{" "}
-        {essaAção.emailOrg ? essaAção.emailOrg : null}
-      </small>
+          <small>
+            Ação organizada por: {essaAção.nomeOrg}.{" "}
+            {essaAção.telOrg ? essaAção.telOrg : null}{" "}
+            {essaAção.emailOrg ? essaAção.emailOrg : null}
+          </small>
 
-      <small>
-        Coordenadas:{" "}
-        <PegarCoordenadas
-          logradouro={essaAção.logradouro}
-          numero={essaAção.numero ? essaAção.numero : null}
-          cep={essaAção.cepAção}
-        />
-      </small>
+          <small>
+            Coordenadas:{" "}
+            <PegarCoordenadas
+              logradouro={essaAção.logradouro}
+              numero={essaAção.numero ? essaAção.numero : null}
+              cep={essaAção.cepAção}
+            />
+          </small>
+        </div>
+      </div>
     </div>
   );
 }

@@ -6,7 +6,7 @@ function NavBar() {
   return (
     <div>
       <Link to="/">
-        <img src={ImgNavBar} height={"180px"} alt="botão home" />
+        <img src={ImgNavBar} height={"100px"} alt="botão home" />
       </Link>
     </div>
   );
