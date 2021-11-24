@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Sobre from "./Sobre";
 import Cadastro from "./Cadastro";
 import Home from "./Home";
@@ -7,13 +7,12 @@ import AçãoÚnica from "./AçãoÚnica";
 import EditarAção from "./EditarAção";
 import DeletarAção from "./DeletarAção";
 import "bootstrap/dist/css/bootstrap.min.css";
-import MapView from "./MapView";
 import Background from "../../Assets/Images/fundo.jpg";
 
 function App() {
   return (
     <div>
-      <img className="background" src={Background} />
+      <img className="background" alt="people in the world" src={Background} />
       <div className="Container">
         <Routes>
           <Route path="/" element={<Home />} />
