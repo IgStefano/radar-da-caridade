@@ -46,7 +46,7 @@ export default function AçãoÚnica() {
             {essaAção.emailOrg ? essaAção.emailOrg : null}
           </small>
 
-          <small hidden>
+          <small>
             Coordenadas:{" "}
             <PegarCoordenadas
               logradouro={essaAção.logradouro}

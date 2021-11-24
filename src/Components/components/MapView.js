@@ -18,54 +18,56 @@ const heartIcon = L.icon({
 
 function MapView(props) {
   const osmAttribution = `&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors`;
-  const [endereçoState, setEndereçoState] = useState(0);
 
-  const endereço = [
-    props.ações[endereçoState].logradouro,
-    props.ações[endereçoState].numero
-      ? props.ações[endereçoState].numero
-      : null,
-    props.ações[endereçoState].cepAção,
-  ].join(" "); // Pega os dados para a busca e junta eles em uma string
+  // Map em ações; criar um endereço para cada chamada da API; gravar coordenadas num state; usar um for of para buscar as coordenadas, array de arrays de coordenadas (criar clone para atualizar o state)
+
+  const endereços = props.ações.map((currentAção) => {
+    return {
+      logradouro: currentAção.logradouro,
+      numero: currentAção.numero ? currentAção.numero : null,
+      cep: currentAção.cepAção,
+    };
+  });
 
   const [coordenadas, setCoordenadas] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(
-        `https://us1.locationiq.com/v1/search.php?key=pk.a30beab4b3f3ebe1c0c0408641e2320a&q=${endereço}&format=json`
-      ) // Pega as coordenadas da API
-      .then((response) => {
-        let data = [response.data[0].lat, response.data[0].lon];
+    for (let i of endereços) {
+      axios
+        .get(
+          `https://us1.locationiq.com/v1/search.php?key=pk.a30beab4b3f3ebe1c0c0408641e2320a&q=${
+            (i.logradouro, i.numero, i.cep)
+          }&format=json`
+        ) // Pega as coordenadas da API
+        .then((response) => {
+          let data = [
+            ...coordenadas,
+            [response.data[0].lat, response.data[0].lon],
+          ];
+          setCoordenadas(data); // Coloca as coordenadas em uma array, na ordem: latitude e longitude
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
+  console.log(coordenadas);
 
-        setCoordenadas(data); // Coloca as coordenadas em uma array, na ordem: latitude e longitude
+  // const markers = props.ações.map((currentAção) => {
+  //   return {
+  //     nomeAção: currentAção.nomeAção,
+  //     posição: [coordenadas],
 
-        if (endereçoState < props.ações.length - 1) {
-          setEndereçoState(endereçoState + 1);
-          console.log(endereçoState);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [endereço, endereçoState]);
-
-  const markers = props.ações.map((currentAção) => {
-    return {
-      nomeAção: currentAção.nomeAção,
-      posição: [coordenadas],
-
-      id: currentAção._id,
-    };
-  });
-
-  console.log(markers);
+  //     id: currentAção._id,
+  //   };
+  // });
 
   const [ações, setAções] = useState([]);
 
   return (
     <MapContainer
-      style={{ width: "770px", height: "700px" }}
+      style={{ width: "auto", height: "700px" }}
       center={[-22.904311, -43.098487]}
       zoom={13}
       scrollWheelZoom={false}
@@ -76,20 +78,11 @@ function MapView(props) {
       ></TileLayer>
 
       {/* Acima, componentes que renderizam o mapa. Abaixo, o map para renderizar os marcadores dentro do mapa */}
-
       <Marker position={[-22.904311, -43.098487]} icon={heartIcon}>
         <Popup>
           <Link to={"/619d4b69cdf92e00177dd149"}>
             Salão de Beleza Comunitário
           </Link>
-          <div ref={"oi"}>
-            {" "}
-            <PegarCoordenadas
-              logradouro="Rua Juiz Goulart Monteiro, 10"
-              cep="24230-370"
-              cidade="Niterói"
-            />
-          </div>
         </Popup>
       </Marker>
       <Marker position={[-23.5505367, -46.6343386]} icon={heartIcon}>

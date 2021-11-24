@@ -150,7 +150,7 @@ export default function Cadastro() {
                       id="inputLogradouro"
                       type="text"
                       name="logradouro"
-                      value={`Logradouro: ${data.logradouro}`}
+                      value={`${data.logradouro}`}
                       readOnly={true}
                       required // Torna o preenchimento desse campo obrigatório
                     />
