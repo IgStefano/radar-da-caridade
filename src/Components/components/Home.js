@@ -76,7 +76,7 @@ function Home() {
               <div className="col-4 ">
                 <div
                   className="overflow-scroll"
-                  style={{ height: "630px", width: "auto" }}
+                  style={{ height: "700px", width: "500px", marginTop: "15%" }}
                 >
                   <Lista ações={ações} />
                 </div>

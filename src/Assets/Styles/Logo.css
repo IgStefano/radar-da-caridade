@@ -2,7 +2,7 @@
   opacity: 15%;
   position: absolute;
   z-index: -1;
-  height: 150vh;
+  height: 160vh;
   width: 100vw;
   overflow: hidden;
 }
@@ -51,5 +51,4 @@
   width: 80px;
   height: 790px;
   margin-left: 30%;
-  margin-top: -10%;
 }
