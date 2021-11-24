@@ -4,7 +4,7 @@ import "../../Assets/Styles/mapView.css";
 import heart from "../../Assets/Images/heartIcon.png";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import PegarCoordenadas from "./PegarCoordenadas";
 
@@ -18,15 +18,17 @@ const heartIcon = L.icon({
 
 function MapView(props) {
   const osmAttribution = `&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors`;
+  const [endereçoState, setEndereçoState] = useState(0);
 
-  const [coordenadas, setCoordenadas] = useState([]);
   const endereço = [
-    props.logradouro,
-    props.numero ? props.numero : null,
-    props.cepAção,
+    props.ações[endereçoState].logradouro,
+    props.ações[endereçoState].numero
+      ? props.ações[endereçoState].numero
+      : null,
+    props.ações[endereçoState].cepAção,
   ].join(" "); // Pega os dados para a busca e junta eles em uma string
 
-  console.log(props.ações);
+  const [coordenadas, setCoordenadas] = useState([]);
 
   useEffect(() => {
     axios
@@ -37,22 +39,27 @@ function MapView(props) {
         let data = [response.data[0].lat, response.data[0].lon];
 
         setCoordenadas(data); // Coloca as coordenadas em uma array, na ordem: latitude e longitude
+
+        if (endereçoState < props.ações.length - 1) {
+          setEndereçoState(endereçoState + 1);
+          console.log(endereçoState);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [endereço]);
+  }, [endereço, endereçoState]);
 
   const markers = props.ações.map((currentAção) => {
     return {
       nomeAção: currentAção.nomeAção,
-      posição: coordenadas,
+      posição: [coordenadas],
 
       id: currentAção._id,
     };
   });
 
-  // console.log(markers[1].posição);
+  console.log(markers);
 
   const [ações, setAções] = useState([]);
 
@@ -75,6 +82,14 @@ function MapView(props) {
           <Link to={"/619d4b69cdf92e00177dd149"}>
             Salão de Beleza Comunitário
           </Link>
+          <div ref={"oi"}>
+            {" "}
+            <PegarCoordenadas
+              logradouro="Rua Juiz Goulart Monteiro, 10"
+              cep="24230-370"
+              cidade="Niterói"
+            />
+          </div>
         </Popup>
       </Marker>
       <Marker position={[-23.5505367, -46.6343386]} icon={heartIcon}>
