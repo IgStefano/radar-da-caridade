@@ -160,7 +160,7 @@ export default function EditarAção() {
                     type="text"
                     name="cepAção"
                     readOnly={true}
-                    value={`CEP: ${data.cep}`}
+                    value={`${data.cep}`}
                     required // Torna o preenchimento desse campo obrigatório
                   />
                   <div className="d-flex flex-column justify-content-around">

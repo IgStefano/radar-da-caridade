@@ -23,6 +23,17 @@ export default function AçãoÚnica() {
       });
   }, []);
 
+  useEffect(() => {
+    axios
+      .put(`https://ironrest.herokuapp.com/radar-da-caridade/${params.id}`, {
+        essaAção,
+      })
+      .then((response) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div>
       <NavBar />

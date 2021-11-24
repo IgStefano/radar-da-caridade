@@ -5,7 +5,6 @@ import Lista from "./Lista";
 import Logo from "../../Assets/Images/Logo.png";
 import Logocss from "../../Assets/Styles/Logo.css";
 import MapView from "./MapView";
-import Background from "../../Assets/Images/fundo.jpg";
 import axios from "axios";
 
 function Home() {

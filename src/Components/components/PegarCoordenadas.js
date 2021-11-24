@@ -17,7 +17,7 @@ export default function PegarCoordenadas(props) {
       .then((response) => {
         let data = [response.data[0].lat, response.data[0].lon];
         console.log(endereço);
-        console.log(data);
+        // console.log(data);
         setCoordenadas(data); // Coloca as coordenadas em uma array, na ordem: latitude e longitude
       })
       .catch((err) => {
@@ -25,5 +25,6 @@ export default function PegarCoordenadas(props) {
       });
   }, [endereço]);
 
+  console.log(coordenadas);
   return coordenadas; // retorna a array de coordenadas
 }

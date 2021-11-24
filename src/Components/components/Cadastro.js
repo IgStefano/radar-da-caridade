@@ -5,6 +5,7 @@ import axios from "axios";
 import NavBar from "./NavBar";
 import ViaCep from "react-via-cep";
 import cadastro from "../../Assets/Styles/cadastro.css";
+import PegarCoordenadas from "./PegarCoordenadas";
 
 export default function Cadastro() {
   const [formData, setFormData] = useState({
@@ -15,6 +16,7 @@ export default function Cadastro() {
     estado: "", // definido automaticamente pelo viaCEP
     numero: "", // number
     complemento: "", // string
+    coordenadas: "", // definido automaticamente
     data: "", // Date
     horário: "", // Time
     descrição: "", // Text-area
@@ -69,6 +71,14 @@ export default function Cadastro() {
     setCep(event.target.value);
   }
 
+  const coordenadas = (
+    <PegarCoordenadas
+      logradouro={formData.logradouro}
+      numero={formData.numero}
+      cep={cep}
+    />
+  );
+
   function handleSuccess(cepData) {
     console.log(cepData);
   }
@@ -82,6 +92,7 @@ export default function Cadastro() {
         logradouro: event.target.logradouro.value,
         cidade: event.target.cidade.value,
         estado: event.target.estado.value,
+        coordenadas: { coordenadas },
       });
       console.log(formData);
     }
@@ -140,7 +151,7 @@ export default function Cadastro() {
                     type="text"
                     name="cepAção"
                     readOnly={true}
-                    value={`CEP: ${data.cep}`}
+                    value={`${data.cep}`}
                     required // Torna o preenchimento desse campo obrigatório
                   />
                   <div className="d-flex flex-column justify-content-around">
