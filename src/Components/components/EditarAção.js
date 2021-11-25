@@ -111,7 +111,7 @@ export default function EditarAção() {
     <div className="d-flex flex-column align-items-center justify-content-center">
       <div className="border-bottom border-light border-2 w-100 d-flex justify-content-center flex-column align-items-center">
         <NavBar />
-        <h2>Cadastre a sua ação abaixo</h2>
+        <h2>Editar minha ação</h2>
       </div>
       <form
         id="cadastro"
@@ -132,104 +132,52 @@ export default function EditarAção() {
           value={formData.nomeAção}
           required // Torna o preenchimento desse campo obrigatório
         />
-        {/* Input CEP */}
-        <ViaCep cep={cep} onSuccess={handleSuccess} lazy>
-          {({ data, loading, error, fetch }) => {
-            if (loading) {
-              return <p>Carregando o seu endereço...</p>;
-            }
-            if (error) {
-              return <p>Erro! Atualize a página e tente novamente.</p>;
-            }
-            if (data) {
-              return (
-                /* <div>
-              {setFormData({
-                ...formData,
-                cepAção: data.cep,
-                logradouro: data.logradouro,
-                cidade: data.localidade,
-                estado: data.uf,
-              })}
-            </div> */
-                <div className="d-flex flex-row justify-content-around align-text-center">
-                  <CadastroField
-                    className="form-control-plaintext m-0 p-0"
-                    // label="CEP"
-                    id="inputCep"
-                    type="text"
-                    name="cepAção"
-                    readOnly={true}
-                    value={`${data.cep}`}
-                    required // Torna o preenchimento desse campo obrigatório
-                  />
-                  <div className="d-flex flex-column justify-content-around">
-                    <CadastroField
-                      // label="Logradouro"
-                      className="form-control-plaintext m-0 p-0"
-                      id="inputLogradouro"
-                      type="text"
-                      name="logradouro"
-                      value={`${data.logradouro}`}
-                      readOnly={true}
-                      required // Torna o preenchimento desse campo obrigatório
-                    />
+        <div className="d-flex flex-row justify-content-around align-text-center">
+          <CadastroField
+            className="form-control-plaintext m-0 p-0"
+            // label="CEP"
+            id="inputCep"
+            type="text"
+            name="cepAção"
+            readOnly={true}
+            value={formData.nomeAção}
+            required // Torna o preenchimento desse campo obrigatório
+          />
+          <div className="d-flex flex-column justify-content-around">
+            <CadastroField
+              // label="Logradouro"
+              className="form-control-plaintext m-0 p-0"
+              id="inputLogradouro"
+              type="text"
+              name="logradouro"
+              value={`${formData.logradouro}`}
+              readOnly={true}
+              required // Torna o preenchimento desse campo obrigatório
+            />
 
-                    <CadastroField
-                      className="form-control-plaintext m-0 p-0"
-                      // label="Cidade"
-                      id="inputCidade"
-                      type="text"
-                      name="cidade"
-                      readOnly={true}
-                      value={`Cidade: ${data.localidade}`}
-                      required // Torna o preenchimento desse campo obrigatório
-                    />
+            <CadastroField
+              className="form-control-plaintext m-0 p-0"
+              // label="Cidade"
+              id="inputCidade"
+              type="text"
+              name="cidade"
+              readOnly={true}
+              value={`Cidade: ${formData.cidade}`}
+              required // Torna o preenchimento desse campo obrigatório
+            />
 
-                    <CadastroField
-                      className="form-control-plaintext m-0 p-0"
-                      // label="UF"
-                      id="inputEstado"
-                      type="text"
-                      name="estado"
-                      readOnly={true}
-                      value={`Estado: ${data.uf}`}
-                      required // Torna o preenchimento desse campo obrigatório
-                    />
-                  </div>
-                </div>
-              );
-            }
-            return (
-              <div className="container">
-                <div className="mb-1 row align-items-center">
-                  <div className="col-form-label">
-                    <label htmlFor="cep-input">CEP</label>
-                    <div className="border-0">
-                      <input
-                        onChange={handleCep}
-                        value={cep}
-                        style={{ width: "104%" }}
-                        className="form-control"
-                        placeholder="(apenas números)"
-                        id="cep-input"
-                        name="cep"
-                        type="number"
-                      />
-                    </div>
-                  </div>
-                  <button
-                    className="btn btn-primary"
-                    style={{ height: "50%", marginTop: "25px" }}
-                    onClick={cep.length !== 8 ? null : fetch}
-                  >
-                    Confirmar CEP
-                  </button>
-                </div>
-              </div>
-            );
-          }}
-        </ViaCep>
+            <CadastroField
+              className="form-control-plaintext m-0 p-0"
+              // label="UF"
+              id="inputEstado"
+              type="text"
+              name="estado"
+              readOnly={true}
+              value={`Estado: ${formData.estado}`}
+              required // Torna o preenchimento desse campo obrigatório
+            />
+          </div>
+        </div>
 
         {/* Input Número */}
         <CadastroField
