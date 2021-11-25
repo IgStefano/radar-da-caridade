@@ -1,3 +1,9 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 3%;
+}
+
 .Title {
   font-family: Impact, fantasy;
   font-size: 70px;

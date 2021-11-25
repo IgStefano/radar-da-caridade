@@ -1,0 +1,13 @@
+.boxCaridometro {
+  text-align: center;
+  display: inline-block;
+  padding: 20px;
+  border-radius: 10px;
+  width: 285px;
+  height: 85px;
+  margin-top: 5%;
+}
+.boxCaridometro div {
+  font-weight: bolder;
+  font-size: 50px;
+}

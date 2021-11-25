@@ -2,6 +2,8 @@ import React from "react";
 import NavBar from "./NavBar";
 import cadastro1 from "../../Assets/Images/cadastre1.png";
 import cadastro2 from "../../Assets/Images/cadastre2.png";
+import mapa from "../../Assets/Images/mapaLista.png";
+import denis from "../../Assets/Images/Denis.jfif";
 
 function Sobre() {
   return (
@@ -28,7 +30,7 @@ function Sobre() {
               textAlign: "justify",
             }}
           >
-            <p>
+            <p className="mx-3">
               O projeto "Radar da Caridade" é uma iniciativa que visa dar
               resposta à necessidade urgente de algo que a humanidade sempre
               enfrentou: A assistência aos menos favorecidos! Hoje, segundo a
@@ -59,7 +61,7 @@ function Sobre() {
                 textAlign: "justify",
               }}
             >
-              <p>
+              <p className="mx-3">
                 Basta cadastrar o tipo de caridade que você irá realizar, o
                 local e a hora! O mapa ficará marcado com a sua ação e assim
                 mais pessoas poderão se juntar a você para fazer o bem!
@@ -76,7 +78,7 @@ function Sobre() {
                   <img
                     src={cadastro2}
                     alt="home do cadastro"
-                    style={{ width: "80%" }}
+                    style={{ width: "85%" }}
                   ></img>
                 </div>
               </div>
@@ -101,14 +103,16 @@ function Sobre() {
                 textAlign: "justify",
               }}
             >
-              <p>
+              <p className="mx-3">
                 Para se juntar a alguém em uma ação de caridade, basta pesquisar
                 no mapa a localização onde você se encontra e uma lista com as
                 ações próximas a você será mostrada! Ou você pode também clicar
                 no coração mostrado no mapa e será redirecionado para os
                 detalhes sobre aquela ação!
-                <p>OBS: METER AQUI UMA IMAGEM DO MAPA</p>
               </p>
+              <div className="d-flex justify-content-center">
+                <img src={mapa} alt="Mapa" style={{ width: "85%" }}></img>
+              </div>
             </div>
             <br />
             <h2
@@ -130,15 +134,19 @@ function Sobre() {
                 textAlign: "justify",
               }}
             >
-              <p>
-                Nascido em Minas Gerais e atualmente vivendo em Niterói, no Rio
-                de Janeiro, casado e pai de família, Denis Carneiro possui uma
-                vasta experiência como Gerente de Operações e Service Desk.
-                Tendo inclusive já desempenhado suas funções na Globo.com, Banco
-                BBM e Ministério Público do Estado do Rio de Janeiro. De
-                formação católica, sempre foi incentivado por seus pais à
-                pratica da caridade.
-              </p>
+              <div className="d-flex justify-content-end">
+                <p className="mx-3">
+                  Nascido em Minas Gerais e atualmente vivendo em Niterói, no
+                  Rio de Janeiro, casado e pai de família, Denis Carneiro possui
+                  uma vasta experiência como Gerente de Operações e Service
+                  Desk. Tendo inclusive já desempenhado suas funções na
+                  Globo.com, Banco BBM e Ministério Público do Estado do Rio de
+                  Janeiro. De formação católica, sempre foi incentivado por seus
+                  pais à pratica da caridade.
+                </p>
+
+                <img src={denis} style={{ width: "85%", width: "250px" }}></img>
+              </div>
             </div>
           </div>
         </div>
