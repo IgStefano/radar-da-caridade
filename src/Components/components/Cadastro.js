@@ -98,7 +98,7 @@ export default function Cadastro() {
         id="cadastro"
         className="mt-3"
         style={{ fontFamily: "Cairo" }}
-        onMouseEnter={handleLoadData}
+        onClick={handleLoadData}
         onSubmit={handleSubmit}
       >
         {/* Input nomeAção */}
@@ -141,6 +141,7 @@ export default function Cadastro() {
                     type="text"
                     name="cepAção"
                     readOnly={true}
+                    onChange={handleChange}
                     value={`${data.cep}`}
                     required // Torna o preenchimento desse campo obrigatório
                   />
@@ -152,6 +153,7 @@ export default function Cadastro() {
                       type="text"
                       name="logradouro"
                       value={`${data.logradouro}`}
+                      onChange={handleChange}
                       readOnly={true}
                       required // Torna o preenchimento desse campo obrigatório
                     />
@@ -163,6 +165,7 @@ export default function Cadastro() {
                       type="text"
                       name="cidade"
                       readOnly={true}
+                      onChange={handleChange}
                       value={`${data.localidade}`}
                       required // Torna o preenchimento desse campo obrigatório
                     />
@@ -174,6 +177,7 @@ export default function Cadastro() {
                       type="text"
                       name="estado"
                       readOnly={true}
+                      onChange={handleChange}
                       value={`${data.uf}`}
                       required // Torna o preenchimento desse campo obrigatório
                     />
@@ -300,6 +304,20 @@ export default function Cadastro() {
           onChange={handleChange}
           value={formData.emailOrg}
         />
+
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            name="checkbox"
+            id="inputCheckbox"
+            value=""
+            required
+          />
+          <label className="form-check-label" htmlFor="inputCheckbox">
+            Eu confirmo que as informações acima estão corretas.
+          </label>
+        </div>
 
         <div className="d-flex justify-content-center">
           <button

@@ -52,8 +52,8 @@ function MapView(props) {
 
         axios
           .get(
-            `https://us1.locationiq.com/v1/search.php?key=pk.a30beab4b3f3ebe1c0c0408641e2320a&street=
-              ${i.logradouro}${i.numero}city=${i.cidade}state=${i.estado}country=Brazilpostalcode=${i.cep}
+            `https://us1.locationiq.com/v1/search.php?key=pk.a30beab4b3f3ebe1c0c0408641e2320a&q=
+              ${i.logradouro},${i.numero},${i.cidade},${i.estado},${i.cep}
 
             &format=json`
           )
