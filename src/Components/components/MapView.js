@@ -96,7 +96,7 @@ function MapView(props) {
     <MapContainer
       style={{ width: "auto", height: "700px" }}
       center={[-22.904311, -43.098487]}
-      zoom={13}
+      zoom={5}
       scrollWheelZoom={false}
     >
       <TileLayer
