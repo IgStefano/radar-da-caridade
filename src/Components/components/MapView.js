@@ -29,6 +29,7 @@ function MapView(props) {
       numero: currentAção.numero ? currentAção.numero : null,
       cidade: currentAção.cidade,
       estado: currentAção.estado,
+      cep: currentAção.cepAção,
     };
   });
 
@@ -51,8 +52,8 @@ function MapView(props) {
 
         axios
           .get(
-            `https://us1.locationiq.com/v1/search.php?key=pk.a30beab4b3f3ebe1c0c0408641e2320a&q=
-              ${i.logradouro}${i.numero}${i.cidade}
+            `https://us1.locationiq.com/v1/search.php?key=pk.a30beab4b3f3ebe1c0c0408641e2320a&street=
+              ${i.logradouro}${i.numero}city=${i.cidade}state=${i.estado}country=Brazilpostalcode=${i.cep}
 
             &format=json`
           )
@@ -98,7 +99,7 @@ function MapView(props) {
     <MapContainer
       style={{ width: "auto", height: "700px" }}
       center={[-22.904311, -43.098487]}
-      zoom={13}
+      zoom={5}
       scrollWheelZoom={false}
     >
       <TileLayer
