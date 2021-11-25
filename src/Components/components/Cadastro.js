@@ -38,6 +38,8 @@ export default function Cadastro() {
     console.log(formData);
   }
 
+  const [loading, setLoading] = useState(false);
+
   function handleSubmit(event) {
     // Impedir o comportamento padrão do formulário de enviar os dados pela URL
     event.preventDefault();
@@ -74,18 +76,26 @@ export default function Cadastro() {
     console.log(cepData);
   }
 
-  function handleLoadData(event) {
+  function handleAddressSearch(event) {
     // Atualiza os dados de endereço do formulário
-    if (event.target.cepAção !== undefined) {
-      setFormData({
-        ...formData,
-        cepAção: event.target.cepAção.value,
-        logradouro: event.target.logradouro.value,
-        cidade: event.target.cidade.value,
-        estado: event.target.estado.value,
+    event.preventDefault();
+    setLoading(true);
+    axios
+      .get(`https://viacep.com.br/ws/${formData.cepAção}/json`)
+      .then((response) => {
+        console.log(response.data);
+        const { cep, logradouro, uf, localidade } = response.data;
+        setFormData({
+          cepAção: cep,
+          logradouro: logradouro,
+          cidade: localidade,
+          estado: uf,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
       });
-      console.log(formData);
-    }
   }
   console.log(formData);
   return (
@@ -98,7 +108,6 @@ export default function Cadastro() {
         id="cadastro"
         className="mt-3"
         style={{ fontFamily: "Cairo" }}
-        onClick={handleLoadData}
         onSubmit={handleSubmit}
       >
         {/* Input nomeAção */}
@@ -114,107 +123,58 @@ export default function Cadastro() {
           required // Torna o preenchimento desse campo obrigatório
         />
         {/* Input CEP */}
-        <ViaCep cep={cep} onSuccess={handleSuccess} lazy>
-          {({ data, loading, error, fetch }) => {
-            if (loading) {
-              return <p>Carregando o seu endereço...</p>;
-            }
-            if (error) {
-              return <p>Erro! Atualize a página e tente novamente.</p>;
-            }
-            if (data) {
-              return (
-                /* <div>
-                {setFormData({
-                  ...formData,
-                  cepAção: data.cep,
-                  logradouro: data.logradouro,
-                  cidade: data.localidade,
-                  estado: data.uf,
-                })}
-              </div> */
-                <div className="d-flex flex-row justify-content-around align-text-center">
-                  <CadastroField
-                    className="form-control-plaintext m-0 p-0"
-                    // label="CEP"
-                    id="inputCep"
-                    type="text"
-                    name="cepAção"
-                    readOnly={true}
-                    onChange={handleChange}
-                    value={`${data.cep}`}
-                    required // Torna o preenchimento desse campo obrigatório
-                  />
-                  <div className="d-flex flex-column justify-content-around">
-                    <CadastroField
-                      // label="Logradouro"
-                      className="form-control-plaintext m-0 p-0"
-                      id="inputLogradouro"
-                      type="text"
-                      name="logradouro"
-                      value={`${data.logradouro}`}
-                      onChange={handleChange}
-                      readOnly={true}
-                      required // Torna o preenchimento desse campo obrigatório
-                    />
 
-                    <CadastroField
-                      className="form-control-plaintext m-0 p-0"
-                      // label="Cidade"
-                      id="inputCidade"
-                      type="text"
-                      name="cidade"
-                      readOnly={true}
-                      onChange={handleChange}
-                      value={`${data.localidade}`}
-                      required // Torna o preenchimento desse campo obrigatório
-                    />
+        <div className="">
+          <div className="form-control d-flex justify-content-between align-items-center mb-2">
+            <label>CEP</label>
+            <input
+              readOnly={loading}
+              name="cepAção"
+              onChange={handleChange}
+              value={formData.cepAção}
+            />
+            <button
+              className="btn btn-primary"
+              disabled={loading}
+              onClick={handleAddressSearch}
+            >
+              Confirmar CEP
+            </button>
+          </div>
 
-                    <CadastroField
-                      className="form-control-plaintext m-0 p-0"
-                      // label="UF"
-                      id="inputEstado"
-                      type="text"
-                      name="estado"
-                      readOnly={true}
-                      onChange={handleChange}
-                      value={`${data.uf}`}
-                      required // Torna o preenchimento desse campo obrigatório
-                    />
-                  </div>
-                </div>
-              );
-            }
-            return (
-              <div className="container">
-                <div className="mb-1 row align-items-center">
-                  <div className="col-form-label">
-                    <label htmlFor="cep-input">CEP</label>
-                    <div className="border-0">
-                      <input
-                        onChange={handleCep}
-                        value={cep}
-                        style={{ width: "104%" }}
-                        className="form-control"
-                        placeholder="(apenas números)"
-                        id="cep-input"
-                        name="cep"
-                        type="number"
-                      />
-                    </div>
-                  </div>
-                  <button
-                    className="btn btn-primary"
-                    style={{ height: "50%", marginTop: "25px" }}
-                    onClick={cep.length !== 8 ? null : fetch}
-                  >
-                    Confirmar CEP
-                  </button>
-                </div>
-              </div>
-            );
-          }}
-        </ViaCep>
+          <div className="form-control mb-2">
+            <label>Logradouro</label>
+            <input
+              className="ms-3"
+              readOnly={loading}
+              name="logradouro"
+              onChange={handleChange}
+              value={formData.logradouro}
+            />
+          </div>
+
+          <div className="form-control mb-2">
+            <label>Cidade</label>
+            <input
+              className="ms-3"
+              readOnly={loading}
+              name="cidade"
+              onChange={handleChange}
+              value={formData.cidade}
+            />
+          </div>
+
+          <div className="form-control mb-2">
+            <label>Estado</label>
+            <input
+              className="ms-3"
+              readOnly={loading}
+              name="estado"
+              onChange={handleChange}
+              value={formData.estado}
+            />
+          </div>
+        </div>
 
         {/* Input Número */}
         <CadastroField
