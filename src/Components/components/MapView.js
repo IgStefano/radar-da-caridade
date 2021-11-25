@@ -51,13 +51,15 @@ function MapView(props) {
 
         axios
           .get(
-            `https://us1.locationiq.com/v1/search.php?key=pk.a30beab4b3f3ebe1c0c0408641e2320a&q=${
-              (i.logradouro, i.numero, i.cidade)
-            }&format=json`
+            `https://us1.locationiq.com/v1/search.php?key=pk.a30beab4b3f3ebe1c0c0408641e2320a&q=
+              ${i.logradouro}${i.numero}${i.cidade}
+
+            &format=json`
           )
           // Pega as coordenadas da API
           .then((response) => {
             let data = coordenadas;
+            console.log(response.data);
             data.push([response.data[0].lat, response.data[0].lon]);
 
             if (coordenadas.length < endereços.length) {
