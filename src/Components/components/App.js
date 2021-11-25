@@ -7,12 +7,11 @@ import AçãoÚnica from "./AçãoÚnica";
 import EditarAção from "./EditarAção";
 import DeletarAção from "./DeletarAção";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Background from "../../Assets/Images/fundo.jpg";
+import Logocss from "../../Assets/Styles/Logo.css";
 
 function App() {
   return (
-    <div>
-      <img className="background" alt="people in the world" src={Background} />
+    <div className="background">
       <div className="Container">
         <Routes>
           <Route path="/" element={<Home />} />

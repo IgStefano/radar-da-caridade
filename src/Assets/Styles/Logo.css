@@ -1,12 +1,3 @@
-.background {
-  opacity: 15%;
-  position: absolute;
-  z-index: -1;
-  height: 160vh;
-  width: 100vw;
-  overflow: hidden;
-}
-
 .Title {
   font-family: Impact, fantasy;
   font-size: 70px;
