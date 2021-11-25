@@ -14,36 +14,37 @@ const heartIcon = L.icon({
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
   iconSize: [25, 25],
-});
+}); // Ícone usado no mapa
 
 function MapView(props) {
   const osmAttribution = `&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors`;
-
-  // Map em ações; criar um endereço para cada chamada da API; gravar coordenadas num state; usar um for of para buscar as coordenadas, array de arrays de coordenadas (criar clone para atualizar o state)
 
   const endereços = props.ações.map((currentAção) => {
     return {
       nomeAção: currentAção.nomeAção,
       id: currentAção._id,
       logradouro: currentAção.logradouro,
-      numero: currentAção.numero ? currentAção.numero : null,
+      bairro: currentAção.bairro,
+      numero: currentAção.numero ? currentAção.numero : "",
       cidade: currentAção.cidade,
       estado: currentAção.estado,
       cep: currentAção.cepAção,
     };
-  });
+  }); // Formulário que será usado para 1) adquirir coordenadas e 2) definir os dados dos marcadores
 
   const [coordenadas, setCoordenadas] = useState([]);
 
+  const [error, setError] = useState(false);
+
   const [markers, setMarkers] = useState([]);
 
-  const index = useRef(0);
+  const index = useRef(0); // Ref que será usada como índice
 
   function wait(time) {
     return new Promise((resolve, reject) => {
       setTimeout(() => resolve(), time);
     });
-  }
+  } // Função cuja utilidade é esperar um segundo (tempo de intervalo de requisições da API de coordenadas)
 
   useEffect(() => {
     async function getCoordinates() {
@@ -53,24 +54,32 @@ function MapView(props) {
         axios
           .get(
             `https://us1.locationiq.com/v1/search.php?key=pk.a30beab4b3f3ebe1c0c0408641e2320a&q=
-              ${i.logradouro},${i.numero},${i.cidade},${i.estado},${i.cep}
-
+              ${i.logradouro},${i.numero},${i.bairro},${i.cidade},${i.estado},${i.cep}
             &format=json`
           )
-          // Pega as coordenadas da API
+          // Pega as coordenadas da API de acordo com as informações de endereço coletadas
           .then((response) => {
-            let data = coordenadas;
-            console.log(response.data);
-            data.push([response.data[0].lat, response.data[0].lon]);
+            if (error) {
+              console.error(response);
+              setError(false);
+            }
+            if (!error) {
+              let data = coordenadas;
+              console.log(response.data);
+              data.push([response.data[0].lat, response.data[0].lon]);
 
-            if (coordenadas.length < endereços.length) {
-              setCoordenadas([[...coordenadas, data]]); // Coloca as coordenadas em uma array, na ordem: latitude e longitude
+              if (coordenadas.length < endereços.length) {
+                setCoordenadas([[...coordenadas, data]]); // Coloca as coordenadas em uma array, na ordem: latitude e longitude
+              }
             }
           })
           .catch((err) => {
-            console.log(err);
+            console.error(err);
+            console.log(error);
+
+            setError(true);
           });
-        await wait(1000);
+        await wait(1000); // O código abaixo define os dados de cada marcador
         let markersData = markers;
         markersData.push({
           nomeAção: i.nomeAção,
@@ -83,17 +92,6 @@ function MapView(props) {
     }
     getCoordinates();
   }, [props.ações]);
-
-  // console.log(coordenadas);
-
-  // const markers = props.ações.map((currentAção) => {
-  //   return {
-  //     nomeAção: currentAção.nomeAção,
-  //     posição: [coordenadas],
-
-  //     id: currentAção._id,
-  //   };
-  // });
 
   return (
     <MapContainer
@@ -109,7 +107,11 @@ function MapView(props) {
 
       {/* Acima, componentes que renderizam o mapa. Abaixo, o map para renderizar os marcadores dentro do mapa */}
 
-      <MarkerCall markers={markers} heartIcon={heartIcon} />
+      {!error ? (
+        <MarkerCall markers={markers} heartIcon={heartIcon} />
+      ) : (
+        "Não foi possível exibir o marcador"
+      )}
 
       {/* <Marker position={[-22.904311, -43.098487]} icon={heartIcon}>
         <Popup>
