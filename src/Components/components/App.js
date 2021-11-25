@@ -7,7 +7,7 @@ import AçãoÚnica from "./AçãoÚnica";
 import EditarAção from "./EditarAção";
 import DeletarAção from "./DeletarAção";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Logocss from "../../Assets/Styles/Logo.css";
+import "../../Assets/Styles/Home.css";
 
 function App() {
   return (

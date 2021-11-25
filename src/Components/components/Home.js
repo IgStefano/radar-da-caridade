@@ -3,9 +3,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Lista from "./Lista";
 import Logo from "../../Assets/Images/Logo.png";
-import Logocss from "../../Assets/Styles/Logo.css";
+import "../../Assets/Styles/Home.css";
 import MapView from "./MapView";
 import axios from "axios";
+import Caridometro from "./Caridometro";
 
 function Home() {
   const [ações, setAções] = useState([]);
@@ -65,14 +66,18 @@ function Home() {
   return (
     <div>
       <div>
-        <div className="">
-          <div className="">
-            <h1 className="Title R">Radar</h1>
-            <h1 className="Title D">da</h1>
-            <h1 className="Title C">Caridade</h1>
-            <img src={Logo} alt="Radar da Caridade" className="LogoHome " />
+        <div>
+          <div className="nav">
+            <div>
+              <h1 className="Title R">Radar</h1>
+              <h1 className="Title D">da</h1>
+              <h1 className="Title C">Caridade</h1>
+              <img src={Logo} alt="Radar da Caridade" className="LogoHome " />
+            </div>
+            <div>
+              <Caridometro />
+            </div>
           </div>
-
           <div className="ms-2">
             <div className="row d-flex align-items-center justify-content-around">
               <div className="col-4 ">
