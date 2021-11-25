@@ -21,6 +21,7 @@ export default function Cadastro() {
     nomeOrg: "", // String
     telOrg: "", // Tel => lembrar de usar label
     emailOrg: "", // Email => lembrar de usar label
+    checkbox: "", // Checkbox
   });
   const [isSending, setIsSending] = useState(false);
   const navigate = useNavigate();
@@ -162,7 +163,7 @@ export default function Cadastro() {
                       type="text"
                       name="cidade"
                       readOnly={true}
-                      value={`Cidade: ${data.localidade}`}
+                      value={`${data.localidade}`}
                       required // Torna o preenchimento desse campo obrigatório
                     />
 
@@ -173,7 +174,7 @@ export default function Cadastro() {
                       type="text"
                       name="estado"
                       readOnly={true}
-                      value={`Estado: ${data.uf}`}
+                      value={`${data.uf}`}
                       required // Torna o preenchimento desse campo obrigatório
                     />
                   </div>
@@ -299,6 +300,7 @@ export default function Cadastro() {
           onChange={handleChange}
           value={formData.emailOrg}
         />
+
         <div className="d-flex justify-content-center">
           <button
             className="btn btn-success w-50 mb-3"
