@@ -6,7 +6,7 @@ import Logo from "../../Assets/Images/Logo.png";
 import "../../Assets/Styles/Home.css";
 import MapView from "./MapView";
 import axios from "axios";
-import Caridometro from "../Caridometro";
+import Caridometro from "./Caridometro";
 
 function Home() {
   const [ações, setAções] = useState([]);

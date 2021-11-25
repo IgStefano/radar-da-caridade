@@ -1,13 +1,23 @@
-.boxCaridometro {
-  text-align: center;
-  display: inline-block;
-  padding: 20px;
-  border-radius: 10px;
-  width: 285px;
-  height: 85px;
-  margin-top: 5%;
-}
-.boxCaridometro div {
+.contadorBox {
   font-weight: bolder;
-  font-size: 50px;
+  font-size: 20px;
+}
+.text1 {
+  font-size: 20px;
+  margin-top: 36%;
+  font-family: "Bebas Neue, cursive";
+}
+.text2 {
+  font-size: 18px;
+  margin-top: 36%;
+  font-family: "Bebas Neue, cursive";
+}
+.boxCaridometro {
+  position: relative;
+  top: 50%;
+}
+.contador {
+  position: absolute;
+  top: 35%;
+  left: 47%;
 }

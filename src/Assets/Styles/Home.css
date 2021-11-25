@@ -1,7 +1,5 @@
 .nav {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 3%;
+  padding-bottom: 100px;
 }
 
 .Title {
@@ -14,7 +12,7 @@
 
 .R {
   position: absolute;
-  margin-top: 2%;
+  margin-top: 0%;
   margin-left: 5%;
 
   font-family: "Montserrat Alternates", sans-serif;
@@ -23,7 +21,7 @@
 }
 .D {
   position: absolute;
-  margin-top: 7%;
+  margin-top: 5%;
   margin-left: 17%;
   font-family: "Montserrat Alternates", sans-serif;
   color: red;
@@ -31,7 +29,7 @@
 }
 .C {
   position: absolute;
-  margin-top: 12%;
+  margin-top: 10%;
   margin-left: 16%;
   font-size: 60px;
 
@@ -40,7 +38,8 @@
   text-shadow: 1px 1px 2px black, 0 0 1em rgb(7, 245, 58), 0 0 0.1em blue;
 }
 .LogoHome {
-  margin-top: 7%;
+  position: absolute;
+  margin-top: 5%;
   margin-left: 7%;
   width: 130px;
 }
