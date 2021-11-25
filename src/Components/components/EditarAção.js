@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavBar from "./NavBar";
-import ViaCep from "react-via-cep";
 
 export default function EditarAção() {
   const params = useParams();
@@ -13,6 +12,7 @@ export default function EditarAção() {
     nomeAção: "", // Input type String
     cepAção: "", // API viaCEP para validar o local
     logradouro: "", // definido automaticamente pelo viaCEP
+    bairro: "",
     cidade: "", // definida automaticamente pelo viaCEP
     estado: "", // definido automaticamente pelo viaCEP
     numero: "", // number
@@ -25,12 +25,6 @@ export default function EditarAção() {
     emailOrg: "", // Email => lembrar de usar label
   });
   const [isSending, setIsSending] = useState(false);
-
-  // Para o valor da data, usar a linha abaixo
-  // value={new Date(formData.birthDate).toISOString().slice(0, 10)}
-
-  // {} => chave (curly bracket)
-  // [] => colchete (square bracket)
 
   function handleChange(event) {
     // ATENÇÃO: a função de atualização de state é DESTRUTIVA, ou seja, ela substitui o state anterior pelo novo. Quando o state é um objeto, se não quisermos perder as chaves anteriores em uma atualização, precisamos salvar todas as chaves existentes usando a sintaxe de espalhamento (...)
@@ -83,10 +77,6 @@ export default function EditarAção() {
 
   const [loading, setLoading] = useState(false);
 
-  function handleSuccess(cepData) {
-    console.log(cepData);
-  }
-
   function handleAddressSearch(event) {
     // Atualiza os dados de endereço do formulário
     event.preventDefault();
@@ -95,10 +85,11 @@ export default function EditarAção() {
       .get(`https://viacep.com.br/ws/${formData.cepAção}/json`)
       .then((response) => {
         console.log(response.data);
-        const { cep, logradouro, uf, localidade } = response.data;
+        const { cep, logradouro, uf, localidade, bairro } = response.data;
         setFormData({
           cepAção: cep,
           logradouro: logradouro,
+          bairro: bairro,
           cidade: localidade,
           estado: uf,
         });
@@ -162,6 +153,17 @@ export default function EditarAção() {
               name="logradouro"
               onChange={handleChange}
               value={formData.logradouro}
+            />
+          </div>
+
+          <div className="form-control mb-2">
+            <label>Bairro</label>
+            <input
+              className="ms-3"
+              readOnly={loading}
+              name="bairro"
+              onChange={handleChange}
+              value={formData.bairro}
             />
           </div>
 

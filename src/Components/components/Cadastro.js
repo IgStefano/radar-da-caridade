@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavBar from "./NavBar";
-import ViaCep from "react-via-cep";
 import cadastro from "../../Assets/Styles/cadastro.css";
 
 export default function Cadastro() {
@@ -13,6 +12,7 @@ export default function Cadastro() {
     logradouro: "", // definido automaticamente pelo viaCEP
     cidade: "", // definida automaticamente pelo viaCEP
     estado: "", // definido automaticamente pelo viaCEP
+    bairro: "",
     numero: "", // number
     complemento: "", // string
     data: "", // Date
@@ -25,12 +25,6 @@ export default function Cadastro() {
   });
   const [isSending, setIsSending] = useState(false);
   const navigate = useNavigate();
-
-  // Para o valor da data, usar a linha abaixo
-  // value={new Date(formData.birthDate).toISOString().slice(0, 10)}
-
-  // {} => chave (curly bracket)
-  // [] => colchete (square bracket)
 
   function handleChange(event) {
     // ATENÇÃO: a função de atualização de state é DESTRUTIVA, ou seja, ela substitui o state anterior pelo novo. Quando o state é um objeto, se não quisermos perder as chaves anteriores em uma atualização, precisamos salvar todas as chaves existentes usando a sintaxe de espalhamento (...)
@@ -64,18 +58,6 @@ export default function Cadastro() {
       });
   }
 
-  // State do CEP
-  const [cep, setCep] = useState("");
-
-  // Função para setar o CEP
-  function handleCep(event) {
-    setCep(event.target.value);
-  }
-
-  function handleSuccess(cepData) {
-    console.log(cepData);
-  }
-
   function handleAddressSearch(event) {
     // Atualiza os dados de endereço do formulário
     event.preventDefault();
@@ -84,10 +66,11 @@ export default function Cadastro() {
       .get(`https://viacep.com.br/ws/${formData.cepAção}/json`)
       .then((response) => {
         console.log(response.data);
-        const { cep, logradouro, uf, localidade } = response.data;
+        const { cep, logradouro, uf, localidade, bairro } = response.data;
         setFormData({
           cepAção: cep,
           logradouro: logradouro,
+          bairro: bairro,
           cidade: localidade,
           estado: uf,
         });
@@ -150,6 +133,17 @@ export default function Cadastro() {
               name="logradouro"
               onChange={handleChange}
               value={formData.logradouro}
+            />
+          </div>
+
+          <div className="form-control mb-2">
+            <label>Bairro</label>
+            <input
+              className="ms-3"
+              readOnly={loading}
+              name="bairro"
+              onChange={handleChange}
+              value={formData.bairro}
             />
           </div>
 

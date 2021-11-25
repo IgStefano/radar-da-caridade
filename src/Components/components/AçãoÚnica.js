@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import NavBar from "./NavBar";
 import axios from "axios";
-import PegarCoordenadas from "./PegarCoordenadas";
 
 export default function AçãoÚnica() {
   const params = useParams();
@@ -55,15 +54,6 @@ export default function AçãoÚnica() {
             Ação organizada por: {essaAção.nomeOrg}.{" "}
             {essaAção.telOrg ? essaAção.telOrg : null}{" "}
             {essaAção.emailOrg ? essaAção.emailOrg : null}
-          </small>
-
-          <small>
-            Coordenadas:{" "}
-            <PegarCoordenadas
-              logradouro={essaAção.logradouro}
-              numero={essaAção.numero ? essaAção.numero : null}
-              cep={essaAção.cepAção}
-            />
           </small>
         </div>
       </div>
