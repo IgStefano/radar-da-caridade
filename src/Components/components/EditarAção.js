@@ -162,7 +162,7 @@ export default function EditarAção() {
               type="text"
               name="cidade"
               readOnly={true}
-              value={`Cidade: ${formData.cidade}`}
+              value={`${formData.cidade}`}
               required // Torna o preenchimento desse campo obrigatório
             />
 
@@ -173,7 +173,7 @@ export default function EditarAção() {
               type="text"
               name="estado"
               readOnly={true}
-              value={`Estado: ${formData.estado}`}
+              value={`${formData.estado}`}
               required // Torna o preenchimento desse campo obrigatório
             />
           </div>
