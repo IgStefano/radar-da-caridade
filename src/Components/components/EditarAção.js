@@ -81,30 +81,32 @@ export default function EditarAção() {
     // O método post do Axios recebe 2 argumentos: primeiro a URL da API, segundo o objeto contendo as informações que queremos enviar
   }
 
-  // State do CEP
-  const [cep, setCep] = useState("");
-
-  // Função para setar o CEP
-  function handleCep(event) {
-    setCep(event.target.value);
-  }
+  const [loading, setLoading] = useState(false);
 
   function handleSuccess(cepData) {
     console.log(cepData);
   }
 
-  function handleLoadData(event) {
+  function handleAddressSearch(event) {
     // Atualiza os dados de endereço do formulário
-    if (event.target.cepAção !== undefined) {
-      setFormData({
-        ...formData,
-        cepAção: event.target.cepAção.value,
-        logradouro: event.target.logradouro.value,
-        cidade: event.target.cidade.value,
-        estado: event.target.estado.value,
+    event.preventDefault();
+    setLoading(true);
+    axios
+      .get(`https://viacep.com.br/ws/${formData.cepAção}/json`)
+      .then((response) => {
+        console.log(response.data);
+        const { cep, logradouro, uf, localidade } = response.data;
+        setFormData({
+          cepAção: cep,
+          logradouro: logradouro,
+          cidade: localidade,
+          estado: uf,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
       });
-      console.log(formData);
-    }
   }
   console.log(formData);
   return (
@@ -117,7 +119,6 @@ export default function EditarAção() {
         id="cadastro"
         className="mt-3"
         style={{ fontFamily: "Cairo" }}
-        onMouseEnter={handleLoadData}
         onSubmit={handleSubmit}
       >
         {/* Input nomeAção */}
@@ -132,49 +133,57 @@ export default function EditarAção() {
           value={formData.nomeAção}
           required // Torna o preenchimento desse campo obrigatório
         />
-        <div className="d-flex flex-row justify-content-around align-text-center">
-          <CadastroField
-            className="form-control-plaintext m-0 p-0"
-            // label="CEP"
-            id="inputCep"
-            type="text"
-            name="cepAção"
-            readOnly={true}
-            value={formData.nomeAção}
-            required // Torna o preenchimento desse campo obrigatório
-          />
-          <div className="d-flex flex-column justify-content-around">
-            <CadastroField
-              // label="Logradouro"
-              className="form-control-plaintext m-0 p-0"
-              id="inputLogradouro"
-              type="text"
+
+        {/* Input CEP */}
+
+        <div className="">
+          <div className="form-control d-flex justify-content-between align-items-center mb-2">
+            <label>CEP</label>
+            <input
+              readOnly={loading}
+              name="cepAção"
+              onChange={handleChange}
+              value={formData.cepAção}
+            />
+            <button
+              className="btn btn-primary"
+              disabled={loading}
+              onClick={handleAddressSearch}
+            >
+              Confirmar CEP
+            </button>
+          </div>
+
+          <div className="form-control mb-2">
+            <label>Logradouro</label>
+            <input
+              className="ms-3"
+              readOnly={loading}
               name="logradouro"
-              value={`${formData.logradouro}`}
-              readOnly={true}
-              required // Torna o preenchimento desse campo obrigatório
+              onChange={handleChange}
+              value={formData.logradouro}
             />
+          </div>
 
-            <CadastroField
-              className="form-control-plaintext m-0 p-0"
-              // label="Cidade"
-              id="inputCidade"
-              type="text"
+          <div className="form-control mb-2">
+            <label>Cidade</label>
+            <input
+              className="ms-3"
+              readOnly={loading}
               name="cidade"
-              readOnly={true}
-              value={`${formData.cidade}`}
-              required // Torna o preenchimento desse campo obrigatório
+              onChange={handleChange}
+              value={formData.cidade}
             />
+          </div>
 
-            <CadastroField
-              className="form-control-plaintext m-0 p-0"
-              // label="UF"
-              id="inputEstado"
-              type="text"
+          <div className="form-control mb-2">
+            <label>Estado</label>
+            <input
+              className="ms-3"
+              readOnly={loading}
               name="estado"
-              readOnly={true}
-              value={`${formData.estado}`}
-              required // Torna o preenchimento desse campo obrigatório
+              onChange={handleChange}
+              value={formData.estado}
             />
           </div>
         </div>

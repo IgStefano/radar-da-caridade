@@ -12,9 +12,7 @@ export default function MarkerCall(props) {
             icon={props.heartIcon}
           >
             <Popup>
-              <Link to={`/${props.markers[currentMarker.id]}`}>
-                {currentMarker.nomeAção}
-              </Link>
+              <Link to={`/${currentMarker.id}`}>{currentMarker.nomeAção}</Link>
             </Popup>
           </Marker>
         );
