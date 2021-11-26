@@ -68,6 +68,7 @@ export default function Cadastro() {
         console.log(response.data);
         const { cep, logradouro, uf, localidade, bairro } = response.data;
         setFormData({
+          ...formData,
           cepAção: cep,
           logradouro: logradouro,
           bairro: bairro,
