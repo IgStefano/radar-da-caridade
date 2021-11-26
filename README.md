@@ -1,8 +1,8 @@
 # Radar da Caridade
 
 Este é o projeto 2 do bootcamp da Ironhack, desenvolvido por Michael Sales (https://github.com/michael-1983) e Igor Stefano (https://github.com/IgStefano/). Idealizado por Denis Carneiro.
-Link: https://61a017bdb6b6315d85b60d00--sad-visvesvaraya-b0c677.netlify.app/
-Slides: https://prezi.com/p/20nurcdkrh9n/
+#### Link: https://61a0db1fcca43b0007bca879--sad-visvesvaraya-b0c677.netlify.app/
+#### Slides: https://prezi.com/p/20nurcdkrh9n/
 
 ## Especificações técnicas
 
